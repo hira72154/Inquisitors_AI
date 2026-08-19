@@ -7,256 +7,144 @@
 
   <title>Inquisitors Society</title>
 
-  <!-- =========================================================
-       GOOGLE FONTS
-  ========================================================== -->
-
+  <!-- GOOGLE FONTS -->
   <link
     href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet"
   >
 
-  <!-- =========================================================
-       MATERIAL ICONS
-  ========================================================== -->
-
+  <!-- MATERIAL ICONS -->
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     rel="stylesheet"
   >
 
-  <!-- =========================================================
-       TAILWIND
-  ========================================================== -->
-
+  <!-- TAILWIND -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <script>
-
     tailwind.config = {
-
       theme: {
-
         extend: {
-
           colors: {
-
             primary: "#006578",
             "primary-container": "#008097",
-
             secondary: "#7c5800",
             "secondary-container": "#feb700",
-
             surface: "#ffffff",
             "surface-container": "#f8f9ff",
             "surface-container-low": "#eff4ff",
             "surface-container-high": "#e5eeff",
-
             "on-surface": "#0b1c30",
             "on-surface-variant": "#40484c",
-
             outline: "#6d797d",
             "outline-variant": "#bdc8cd"
           },
 
           fontFamily: {
-
             display: ["Hanken Grotesk", "sans-serif"],
             body: ["Inter", "sans-serif"]
-
           }
-
         }
-
       }
-
     };
-
   </script>
 
-
-  <!-- =========================================================
-       PDF READER
-  ========================================================== -->
-
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs"
-    type="module">
-  </script>
-
-
-  <!-- =========================================================
-       DOCX READER
-  ========================================================== -->
-
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js">
-  </script>
-
-
-  <!-- =========================================================
-       BASIC STYLE
-  ========================================================== -->
+  <!-- DOCX READER -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
 
   <style>
 
     html,
     body {
-
       margin: 0;
       padding: 0;
-
     }
 
     body {
-
       overscroll-behavior: none;
-
     }
 
     ::-webkit-scrollbar {
-
       width: 5px;
-
     }
 
     ::-webkit-scrollbar-track {
-
       background: transparent;
-
     }
 
     ::-webkit-scrollbar-thumb {
-
       background: rgba(109,121,125,0.25);
       border-radius: 10px;
-
     }
 
-
-    /* =========================================================
-       ANIMATIONS
-    ========================================================== */
-
     @keyframes float {
-
-      0%,
-      100% {
-
+      0%, 100% {
         transform: translateY(0);
-
       }
 
       50% {
-
         transform: translateY(-7px);
-
       }
-
     }
-
 
     @keyframes fadeIn {
-
       from {
-
         opacity: 0;
         transform: translateY(10px);
-
       }
 
       to {
-
         opacity: 1;
         transform: translateY(0);
-
       }
-
     }
 
-
     @keyframes popup {
-
       from {
-
         opacity: 0;
         transform: scale(0.95);
-
       }
 
       to {
-
         opacity: 1;
         transform: scale(1);
-
       }
-
     }
-
 
     .animate-float {
-
       animation: float 4s ease-in-out infinite;
-
     }
-
 
     .animate-fade {
-
       animation: fadeIn 0.25s ease-out;
-
     }
-
 
     .chat-popup-animation {
-
       animation: popup 0.25s ease-out;
-
     }
-
-
-    /* =========================================================
-       MODAL BACKDROP
-    ========================================================== */
 
     .modal-backdrop {
-
       background: rgba(11, 28, 48, 0.35);
       backdrop-filter: blur(5px);
-
     }
 
-
-    /* =========================================================
-       VOICE RECORDING
-    ========================================================== */
-
     .recording {
-
       animation: pulse 1s infinite;
-
     }
 
     @keyframes pulse {
-
       0% {
-
         box-shadow: 0 0 0 0 rgba(0,101,120,0.4);
-
       }
 
       70% {
-
         box-shadow: 0 0 0 12px rgba(0,101,120,0);
-
       }
 
       100% {
-
         box-shadow: 0 0 0 0 rgba(0,101,120,0);
-
       }
-
     }
 
   </style>
@@ -264,9 +152,7 @@
 </head>
 
 
-<body
-  class="bg-white text-on-surface font-body min-h-full flex flex-col"
->
+<body class="bg-white text-on-surface font-body min-h-full flex flex-col">
 
 
 <!-- ============================================================
@@ -279,8 +165,6 @@
          backdrop-blur-md sticky top-0 z-40"
 >
 
-  <!-- LOGO -->
-
   <div class="flex items-center gap-3">
 
     <img
@@ -289,16 +173,12 @@
       class="h-10 w-auto object-contain"
     >
 
-    <span
-      class="font-display font-bold text-lg md:text-xl"
-    >
+    <span class="font-display font-bold text-lg md:text-xl">
       Inquisitors Society
     </span>
 
   </div>
 
-
-  <!-- NAVIGATION -->
 
   <nav
     class="hidden md:flex items-center gap-7
@@ -324,11 +204,7 @@
   </nav>
 
 
-  <!-- RIGHT SIDE -->
-
   <div class="flex items-center gap-3">
-
-    <!-- INTERVIEW BUTTON -->
 
     <button
       onclick="openInterview()"
@@ -349,8 +225,6 @@
     </button>
 
 
-    <!-- MOBILE INTERVIEW -->
-
     <button
       onclick="openInterview()"
       class="sm:hidden w-10 h-10 rounded-xl
@@ -369,15 +243,9 @@
 </header>
 
 
-<!-- ============================================================
-     MAIN SCREEN
-============================================================= -->
+<!-- MAIN -->
 
-<main
-  class="flex-1 bg-white min-h-[calc(100vh-144px)]"
->
-
-  <!-- EMPTY / CLEAN LIGHT AREA -->
+<main class="flex-1 bg-white min-h-[calc(100vh-144px)]">
 
   <div
     class="w-full h-full min-h-[calc(100vh-144px)]
@@ -388,9 +256,7 @@
 </main>
 
 
-<!-- ============================================================
-     FOOTER
-============================================================= -->
+<!-- FOOTER -->
 
 <footer
   class="py-6 px-8
@@ -410,11 +276,7 @@
      QUISI FLOATING BUTTON
 ============================================================= -->
 
-<div
-  class="fixed bottom-6 right-6 z-50"
->
-
-  <!-- TOOLTIP -->
+<div class="fixed bottom-6 right-6 z-50">
 
   <div
     id="quisi-tooltip"
@@ -437,15 +299,11 @@
       onclick="dismissTooltip(event)"
       class="text-on-surface-variant hover:text-primary"
     >
-
       ×
-
     </button>
 
   </div>
 
-
-  <!-- CIRCULAR ROBOT -->
 
   <button
     onclick="toggleChat()"
@@ -469,8 +327,6 @@
       class="w-16 h-16 object-contain animate-float"
     >
 
-    <!-- ONLINE -->
-
     <span
       class="absolute bottom-1 right-1
              w-4 h-4
@@ -485,7 +341,7 @@
 
 
 <!-- ============================================================
-     QUISI CHATBOT
+     CHATBOT
 ============================================================= -->
 
 <div
@@ -505,8 +361,7 @@
          flex-col"
 >
 
-
-  <!-- CHAT HEADER -->
+  <!-- HEADER -->
 
   <div
     class="px-5 py-4
@@ -518,8 +373,7 @@
     <div class="flex items-center gap-3">
 
       <div
-        class="w-11 h-11
-               rounded-full
+        class="w-11 h-11 rounded-full
                bg-white
                border border-outline-variant/30
                flex items-center justify-center
@@ -539,9 +393,7 @@
 
         <div class="flex items-center gap-2">
 
-          <span
-            class="font-display font-bold"
-          >
+          <span class="font-display font-bold">
             Quisi
           </span>
 
@@ -560,9 +412,7 @@
 
         </div>
 
-        <span
-          class="text-xs text-on-surface-variant"
-        >
+        <span class="text-xs text-on-surface-variant">
           Inquisitors Society AI Companion
         </span>
 
@@ -570,8 +420,6 @@
 
     </div>
 
-
-    <!-- CLOSE -->
 
     <button
       onclick="toggleChat()"
@@ -589,9 +437,7 @@
   </div>
 
 
-  <!-- ========================================================
-       CHAT MESSAGES
-  ========================================================= -->
+  <!-- MESSAGES -->
 
   <div
     id="chat-messages"
@@ -599,8 +445,6 @@
            p-4 flex flex-col gap-4
            bg-white"
   >
-
-    <!-- WELCOME -->
 
     <div
       class="flex flex-col gap-1.5
@@ -625,7 +469,6 @@
           >
 
         </div>
-
 
         <div
           class="bg-surface-container
@@ -654,9 +497,7 @@
   </div>
 
 
-  <!-- ========================================================
-       FILE PREVIEW
-  ========================================================= -->
+  <!-- FILE PREVIEW -->
 
   <div
     id="file-preview"
@@ -669,44 +510,32 @@
 
     <div class="flex items-center justify-between gap-2">
 
-      <div
-        class="flex items-center gap-2 min-w-0"
-      >
+      <div class="flex items-center gap-2 min-w-0">
 
-        <span
-          class="material-symbols-outlined
-                 text-primary"
-        >
+        <span class="material-symbols-outlined text-primary">
           description
         </span>
 
         <span
           id="file-name"
-          class="truncate
-                 text-xs
-                 font-semibold"
+          class="truncate text-xs font-semibold"
         ></span>
 
       </div>
 
-
       <button
         type="button"
         onclick="removeSelectedFile()"
-        class="text-on-surface-variant
-               hover:text-primary"
+        class="text-on-surface-variant hover:text-primary"
       >
 
-        <span
-          class="material-symbols-outlined text-[18px]"
-        >
+        <span class="material-symbols-outlined text-[18px]">
           close
         </span>
 
       </button>
 
     </div>
-
 
     <div
       id="file-status"
@@ -720,9 +549,7 @@
   </div>
 
 
-  <!-- ========================================================
-       CHAT INPUT
-  ========================================================= -->
+  <!-- INPUT -->
 
   <div
     class="p-3
@@ -739,8 +566,6 @@
              border border-outline-variant/30"
     >
 
-      <!-- FILE BUTTON -->
-
       <button
         type="button"
         id="attach-file-btn"
@@ -753,16 +578,12 @@
                flex-shrink-0"
       >
 
-        <span
-          class="material-symbols-outlined text-[20px]"
-        >
+        <span class="material-symbols-outlined text-[20px]">
           attach_file
         </span>
 
       </button>
 
-
-      <!-- REAL FILE INPUT -->
 
       <input
         type="file"
@@ -771,8 +592,6 @@
         accept=".txt,.pdf,.docx,.csv,.json,.md"
       >
 
-
-      <!-- TEXT INPUT -->
 
       <textarea
         id="popup-chat-input"
@@ -794,8 +613,6 @@
         class="flex items-center gap-1
                mb-0.5 flex-shrink-0"
       >
-
-        <!-- VOICE -->
 
         <button
           type="button"
@@ -820,8 +637,6 @@
         </button>
 
 
-        <!-- SEND -->
-
         <button
           type="submit"
           id="popup-send-btn"
@@ -835,9 +650,7 @@
                  transition"
         >
 
-          <span
-            class="material-symbols-outlined text-[18px]"
-          >
+          <span class="material-symbols-outlined text-[18px]">
             send
           </span>
 
@@ -847,10 +660,7 @@
 
     </form>
 
-
-    <div
-      class="text-center mt-2"
-    >
+    <div class="text-center mt-2">
 
       <span
         class="text-[9px]
@@ -882,9 +692,6 @@
          p-4"
 >
 
-
-  <!-- INTERVIEW CARD -->
-
   <div
     class="w-full max-w-2xl
            max-h-[92vh]
@@ -893,7 +700,6 @@
            rounded-3xl
            shadow-2xl"
   >
-
 
     <!-- HEADER -->
 
@@ -906,11 +712,7 @@
 
       <div>
 
-        <h2
-          class="font-display
-                 font-bold
-                 text-xl"
-        >
+        <h2 class="font-display font-bold text-xl">
           AI Mock Interview
         </h2>
 
@@ -924,11 +726,9 @@
 
       </div>
 
-
       <button
         onclick="closeInterview()"
-        class="w-9 h-9
-               rounded-full
+        class="w-9 h-9 rounded-full
                hover:bg-surface-container-high
                flex items-center justify-center"
       >
@@ -942,18 +742,11 @@
     </div>
 
 
-    <!-- ======================================================
-         ENROLLMENT
-    ======================================================= -->
+    <!-- ENROLLMENT -->
 
-    <div
-      id="interview-enrollment"
-      class="p-6"
-    >
+    <div id="interview-enrollment" class="p-6">
 
-      <div
-        class="mb-6"
-      >
+      <div class="mb-6">
 
         <div
           class="w-12 h-12
@@ -972,12 +765,7 @@
 
         </div>
 
-
-        <h3
-          class="font-display
-                 font-bold
-                 text-lg"
-        >
+        <h3 class="font-display font-bold text-lg">
           Candidate Registration
         </h3>
 
@@ -994,16 +782,9 @@
 
       <div class="space-y-4">
 
-
-        <!-- NAME -->
-
         <div>
 
-          <label
-            class="block text-xs
-                   font-semibold
-                   mb-1.5"
-          >
+          <label class="block text-xs font-semibold mb-1.5">
             Full Name
           </label>
 
@@ -1011,26 +792,17 @@
             id="candidate-name"
             type="text"
             placeholder="Enter your name"
-            class="w-full
-                   px-4 py-3
-                   rounded-xl
+            class="w-full px-4 py-3 rounded-xl
                    border border-outline-variant/40
-                   outline-none
-                   focus:border-primary"
+                   outline-none focus:border-primary"
           >
 
         </div>
 
 
-        <!-- EMAIL -->
-
         <div>
 
-          <label
-            class="block text-xs
-                   font-semibold
-                   mb-1.5"
-          >
+          <label class="block text-xs font-semibold mb-1.5">
             Email
           </label>
 
@@ -1038,26 +810,17 @@
             id="candidate-email"
             type="email"
             placeholder="Enter your email"
-            class="w-full
-                   px-4 py-3
-                   rounded-xl
+            class="w-full px-4 py-3 rounded-xl
                    border border-outline-variant/40
-                   outline-none
-                   focus:border-primary"
+                   outline-none focus:border-primary"
           >
 
         </div>
 
 
-        <!-- ROLE -->
-
         <div>
 
-          <label
-            class="block text-xs
-                   font-semibold
-                   mb-1.5"
-          >
+          <label class="block text-xs font-semibold mb-1.5">
             Role
           </label>
 
@@ -1065,26 +828,17 @@
             id="candidate-role"
             type="text"
             placeholder="e.g. AI Engineer"
-            class="w-full
-                   px-4 py-3
-                   rounded-xl
+            class="w-full px-4 py-3 rounded-xl
                    border border-outline-variant/40
-                   outline-none
-                   focus:border-primary"
+                   outline-none focus:border-primary"
           >
 
         </div>
 
 
-        <!-- DOMAIN -->
-
         <div>
 
-          <label
-            class="block text-xs
-                   font-semibold
-                   mb-1.5"
-          >
+          <label class="block text-xs font-semibold mb-1.5">
             Domain
           </label>
 
@@ -1092,34 +846,22 @@
             id="candidate-domain"
             type="text"
             placeholder="e.g. Artificial Intelligence"
-            class="w-full
-                   px-4 py-3
-                   rounded-xl
+            class="w-full px-4 py-3 rounded-xl
                    border border-outline-variant/40
-                   outline-none
-                   focus:border-primary"
+                   outline-none focus:border-primary"
           >
 
         </div>
 
 
-        <!-- START -->
-
         <button
           onclick="startInterview()"
-          class="w-full
-                 mt-3
-                 py-3.5
-                 rounded-xl
-                 bg-primary
-                 text-white
-                 font-semibold
-                 hover:bg-primary-container
-                 transition"
+          id="start-interview-btn"
+          class="w-full mt-3 py-3.5 rounded-xl
+                 bg-primary text-white font-semibold
+                 hover:bg-primary-container transition"
         >
-
           Start Interview
-
         </button>
 
       </div>
@@ -1127,21 +869,12 @@
     </div>
 
 
-    <!-- ======================================================
-         INTERVIEW SCREEN
-    ======================================================= -->
+    <!-- INTERVIEW SCREEN -->
 
-    <div
-      id="interview-screen"
-      class="hidden p-6"
-    >
-
-      <!-- PROGRESS -->
+    <div id="interview-screen" class="hidden p-6">
 
       <div
-        class="flex items-center
-               justify-between
-               mb-5"
+        class="flex items-center justify-between mb-5"
       >
 
         <div>
@@ -1160,7 +893,6 @@
 
         </div>
 
-
         <span
           id="question-counter"
           class="text-xs
@@ -1174,8 +906,6 @@
 
       </div>
 
-
-      <!-- QUESTION -->
 
       <div
         class="rounded-2xl
@@ -1191,9 +921,7 @@
                  mb-3"
         >
 
-          <span
-            class="material-symbols-outlined text-[18px]"
-          >
+          <span class="material-symbols-outlined text-[18px]">
             quiz
           </span>
 
@@ -1214,80 +942,54 @@
       </div>
 
 
-      <!-- ANSWER -->
-
       <textarea
         id="interview-answer"
         rows="6"
         placeholder="Type your answer here..."
-        class="w-full
-               px-4 py-3
+        class="w-full px-4 py-3
                rounded-xl
                border border-outline-variant/40
-               outline-none
-               resize-none
+               outline-none resize-none
                focus:border-primary
                text-sm"
       ></textarea>
 
 
-      <!-- ACTION -->
-
       <button
         onclick="submitInterviewAnswer()"
         id="submit-answer-btn"
-        class="w-full
-               mt-4
-               py-3.5
-               rounded-xl
-               bg-primary
-               text-white
+        class="w-full mt-4
+               py-3.5 rounded-xl
+               bg-primary text-white
                font-semibold
-               hover:bg-primary-container
-               transition"
+               hover:bg-primary-container transition"
       >
-
         Submit Answer
-
       </button>
 
 
-      <!-- EXIT -->
-
       <button
         onclick="closeInterview()"
-        class="w-full
-               mt-2
-               py-2.5
+        class="w-full mt-2 py-2.5
                text-xs
                text-on-surface-variant
                hover:text-primary"
       >
-
         Exit Interview
-
       </button>
 
     </div>
 
 
-    <!-- ======================================================
-         RESULT
-    ======================================================= -->
+    <!-- RESULT -->
 
-    <div
-      id="interview-result"
-      class="hidden p-6"
-    >
+    <div id="interview-result" class="hidden p-6">
 
-      <div
-        class="text-center mb-6"
-      >
+      <div class="text-center mb-6">
 
         <div
           id="result-icon"
-          class="mx-auto
-                 w-16 h-16
+          class="mx-auto w-16 h-16
                  rounded-full
                  bg-primary/10
                  flex items-center justify-center
@@ -1306,12 +1008,11 @@
 
         <h2
           id="result-status"
-          class="font-display
-                 font-bold
-                 text-2xl"
+          class="font-display font-bold text-2xl"
         >
           SELECTED
         </h2>
+
 
         <p
           id="result-candidate"
@@ -1323,17 +1024,13 @@
       </div>
 
 
-      <!-- SCORE -->
-
       <div
-        class="grid grid-cols-2
-               md:grid-cols-4
+        class="grid grid-cols-2 md:grid-cols-4
                gap-3 mb-5"
       >
 
         <div
-          class="rounded-xl
-                 bg-surface-container
+          class="rounded-xl bg-surface-container
                  p-4 text-center"
         >
 
@@ -1356,15 +1053,11 @@
 
 
         <div
-          class="rounded-xl
-                 bg-surface-container
+          class="rounded-xl bg-surface-container
                  p-4 text-center"
         >
 
-          <div
-            id="technical-score"
-            class="text-xl font-bold"
-          >
+          <div id="technical-score" class="text-xl font-bold">
             0/10
           </div>
 
@@ -1380,15 +1073,11 @@
 
 
         <div
-          class="rounded-xl
-                 bg-surface-container
+          class="rounded-xl bg-surface-container
                  p-4 text-center"
         >
 
-          <div
-            id="communication-score"
-            class="text-xl font-bold"
-          >
+          <div id="communication-score" class="text-xl font-bold">
             0/10
           </div>
 
@@ -1404,15 +1093,11 @@
 
 
         <div
-          class="rounded-xl
-                 bg-surface-container
+          class="rounded-xl bg-surface-container
                  p-4 text-center"
         >
 
-          <div
-            id="problem-score"
-            class="text-xl font-bold"
-          >
+          <div id="problem-score" class="text-xl font-bold">
             0/10
           </div>
 
@@ -1429,21 +1114,15 @@
       </div>
 
 
-      <!-- SKILLS -->
-
       <div
         class="rounded-2xl
                bg-surface-container
                p-5 mb-4"
       >
 
-        <h3
-          class="font-semibold
-                 text-sm mb-3"
-        >
+        <h3 class="font-semibold text-sm mb-3">
           Skills Assessment
         </h3>
-
 
         <div
           id="skills-list"
@@ -1453,18 +1132,13 @@
       </div>
 
 
-      <!-- SHORT FEEDBACK -->
-
       <div
         class="rounded-2xl
                border border-outline-variant/30
                p-5"
       >
 
-        <h3
-          class="font-semibold
-                 text-sm mb-2"
-        >
+        <h3 class="font-semibold text-sm mb-2">
           Feedback
         </h3>
 
@@ -1478,21 +1152,14 @@
       </div>
 
 
-      <!-- CLOSE -->
-
       <button
         onclick="closeInterview()"
-        class="w-full
-               mt-5
-               py-3
+        class="w-full mt-5 py-3
                rounded-xl
-               bg-primary
-               text-white
+               bg-primary text-white
                font-semibold"
       >
-
         Done
-
       </button>
 
     </div>
@@ -1508,29 +1175,44 @@
 
 <script>
 
-
 /* =============================================================
-   API
+   PUBLIC BACKEND
 ============================================================= */
 
+/*
+  IMPORTANT:
+
+  Ye localhost nahi hai.
+
+  Ye tumhara deployed/public FastAPI backend hai.
+*/
+
+const BACKEND_URL =
+  "https://inquisitors-ai-9d64f4c7.fastapicloud.dev";
+
+
 const API_ENDPOINT =
-  "https://inquisitors-ai-9d64f4c7.fastapicloud.dev/chat";
+  `${BACKEND_URL}/chat`;
 
 
 const INTERVIEW_QUESTION_ENDPOINT =
-  "https://inquisitors-ai-9d64f4c7.fastapicloud.dev/interview/question";
+  `${BACKEND_URL}/interview/question`;
 
 
 const INTERVIEW_EVALUATION_ENDPOINT =
-  "https://inquisitors-ai-9d64f4c7.fastapicloud.dev/interview/evaluate";
+  `${BACKEND_URL}/interview/evaluate`;
 
+
+/* =============================================================
+   AVATAR
+============================================================= */
 
 const AVATAR_URL =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA";
 
 
 /* =============================================================
-   GENERAL HELPERS
+   HELPERS
 ============================================================= */
 
 function formatTime(date) {
@@ -1551,7 +1233,7 @@ function escapeHtml(text) {
 
   const div = document.createElement("div");
 
-  div.innerText = text;
+  div.textContent = text ?? "";
 
   return div.innerHTML;
 
@@ -1563,12 +1245,11 @@ function scrollToBottom() {
   const container =
     document.getElementById("chat-messages");
 
+  if (!container) return;
+
   container.scrollTo({
-
     top: container.scrollHeight,
-
     behavior: "smooth"
-
   });
 
 }
@@ -1581,21 +1262,21 @@ function scrollToBottom() {
 function dismissTooltip(event) {
 
   if (event) {
-
     event.stopPropagation();
-
   }
 
   const tooltip =
     document.getElementById("quisi-tooltip");
 
-  tooltip.classList.add("hidden");
+  if (tooltip) {
+    tooltip.classList.add("hidden");
+  }
 
 }
 
 
 /* =============================================================
-   CHAT OPEN / CLOSE
+   CHAT
 ============================================================= */
 
 function toggleChat() {
@@ -1603,20 +1284,23 @@ function toggleChat() {
   const popup =
     document.getElementById("quisi-chat-popup");
 
+  if (!popup) return;
+
 
   if (popup.classList.contains("hidden")) {
 
     popup.classList.remove("hidden");
-
     popup.classList.add("flex");
-
     popup.classList.add("chat-popup-animation");
 
     setTimeout(() => {
 
-      document
-        .getElementById("popup-chat-input")
-        .focus();
+      const input =
+        document.getElementById("popup-chat-input");
+
+      if (input) {
+        input.focus();
+      }
 
       scrollToBottom();
 
@@ -1627,7 +1311,6 @@ function toggleChat() {
   else {
 
     popup.classList.add("hidden");
-
     popup.classList.remove("flex");
 
   }
@@ -1636,7 +1319,7 @@ function toggleChat() {
 
 
 /* =============================================================
-   APPEND CHAT MESSAGE
+   APPEND MESSAGE
 ============================================================= */
 
 function appendMessage(text, sender) {
@@ -1644,8 +1327,12 @@ function appendMessage(text, sender) {
   const chatMessages =
     document.getElementById("chat-messages");
 
+  if (!chatMessages) return;
+
+
   const time =
     formatTime(new Date());
+
 
   const safeText =
     escapeHtml(text)
@@ -1659,31 +1346,18 @@ function appendMessage(text, sender) {
 
     messageHtml = `
 
-      <div
-        class="flex flex-col gap-1.5
-               max-w-[88%]
-               self-end
-               animate-fade"
-      >
+      <div class="flex flex-col gap-1.5 max-w-[88%] self-end animate-fade">
 
-        <div
-          class="flex items-end gap-2
-                 flex-row-reverse"
-        >
+        <div class="flex items-end gap-2 flex-row-reverse">
 
           <div
-            class="w-7 h-7
-                   rounded-full
-                   bg-primary
-                   text-white
+            class="w-7 h-7 rounded-full
+                   bg-primary text-white
                    flex items-center justify-center
                    flex-shrink-0"
           >
 
-            <span
-              class="material-symbols-outlined
-                     text-[16px]"
-            >
+            <span class="material-symbols-outlined text-[16px]">
               person
             </span>
 
@@ -1691,13 +1365,10 @@ function appendMessage(text, sender) {
 
 
           <div
-            class="bg-primary
-                   text-white
+            class="bg-primary text-white
                    px-4 py-3
-                   rounded-2xl
-                   rounded-br-sm
-                   text-sm
-                   leading-relaxed"
+                   rounded-2xl rounded-br-sm
+                   text-sm leading-relaxed"
           >
 
             ${safeText}
@@ -1710,12 +1381,9 @@ function appendMessage(text, sender) {
         <span
           class="text-[10px]
                  text-on-surface-variant/60
-                 self-end
-                 mr-9"
+                 self-end mr-9"
         >
-
           ${time}
-
         </span>
 
       </div>
@@ -1724,30 +1392,20 @@ function appendMessage(text, sender) {
 
   }
 
-
   else {
 
     messageHtml = `
 
-      <div
-        class="flex flex-col gap-1.5
-               max-w-[88%]
-               self-start
-               animate-fade"
-      >
+      <div class="flex flex-col gap-1.5 max-w-[88%] self-start animate-fade">
 
-        <div
-          class="flex items-end gap-2.5"
-        >
+        <div class="flex items-end gap-2.5">
 
           <div
-            class="w-8 h-8
-                   rounded-full
+            class="w-8 h-8 rounded-full
                    bg-surface-container
                    border border-outline-variant/30
                    flex items-center justify-center
-                   overflow-hidden
-                   flex-shrink-0"
+                   overflow-hidden flex-shrink-0"
           >
 
             <img
@@ -1762,10 +1420,8 @@ function appendMessage(text, sender) {
           <div
             class="bg-surface-container
                    px-4 py-3
-                   rounded-2xl
-                   rounded-bl-sm
-                   text-sm
-                   leading-relaxed"
+                   rounded-2xl rounded-bl-sm
+                   text-sm leading-relaxed"
           >
 
             ${safeText}
@@ -1780,9 +1436,7 @@ function appendMessage(text, sender) {
                  text-on-surface-variant/60
                  ml-10"
         >
-
           ${time}
-
         </span>
 
       </div>
@@ -1812,19 +1466,19 @@ function showLoadingIndicator() {
   const chatMessages =
     document.getElementById("chat-messages");
 
+  if (!chatMessages) return;
+
 
   const html = `
 
     <div
       id="loading-indicator"
       class="flex items-center gap-3
-             max-w-[88%]
-             animate-fade"
+             max-w-[88%] animate-fade"
     >
 
       <div
-        class="w-8 h-8
-               rounded-full
+        class="w-8 h-8 rounded-full
                bg-surface-container
                flex items-center justify-center"
       >
@@ -1845,9 +1499,7 @@ function showLoadingIndicator() {
                text-xs
                text-on-surface-variant"
       >
-
         Quisi is thinking...
-
       </div>
 
     </div>
@@ -1869,14 +1521,10 @@ function showLoadingIndicator() {
 function removeLoadingIndicator() {
 
   const indicator =
-    document.getElementById(
-      "loading-indicator"
-    );
+    document.getElementById("loading-indicator");
 
   if (indicator) {
-
     indicator.remove();
-
   }
 
 }
@@ -1896,115 +1544,99 @@ const fileInput =
 
 
 const attachFileBtn =
-  document.getElementById(
-    "attach-file-btn"
-  );
+  document.getElementById("attach-file-btn");
 
 
 const filePreview =
-  document.getElementById(
-    "file-preview"
-  );
+  document.getElementById("file-preview");
 
 
 const fileNameElement =
-  document.getElementById(
-    "file-name"
-  );
+  document.getElementById("file-name");
 
 
 const fileStatus =
-  document.getElementById(
-    "file-status"
+  document.getElementById("file-status");
+
+
+if (attachFileBtn && fileInput) {
+
+  attachFileBtn.addEventListener(
+    "click",
+    () => fileInput.click()
   );
 
-
-attachFileBtn.addEventListener(
-  "click",
-  () => {
-
-    fileInput.click();
-
-  }
-);
+}
 
 
-fileInput.addEventListener(
-  "change",
-  async function () {
+if (fileInput) {
 
-    const file =
-      this.files[0];
+  fileInput.addEventListener(
+    "change",
+    async function () {
 
+      const file = this.files[0];
 
-    if (!file) {
-
-      return;
-
-    }
+      if (!file) return;
 
 
-    selectedFile = file;
-
-    extractedFileText = "";
-
-
-    filePreview.classList.remove(
-      "hidden"
-    );
+      selectedFile = file;
+      extractedFileText = "";
 
 
-    fileNameElement.textContent =
-      file.name;
+      filePreview.classList.remove("hidden");
+
+      fileNameElement.textContent =
+        file.name;
+
+      fileStatus.textContent =
+        "Reading file...";
 
 
-    fileStatus.textContent =
-      "Reading file...";
+      try {
+
+        extractedFileText =
+          await extractFileText(file);
 
 
-    try {
+        if (
+          !extractedFileText ||
+          extractedFileText.trim() === ""
+        ) {
 
-      extractedFileText =
-        await extractFileText(file);
+          fileStatus.textContent =
+            "No readable text found.";
 
+          return;
 
-      if (
-        !extractedFileText ||
-        extractedFileText.trim() === ""
-      ) {
+        }
+
 
         fileStatus.textContent =
-          "No readable text found.";
-
-        return;
+          `File ready • ${
+            extractedFileText.length.toLocaleString()
+          } characters`;
 
       }
 
+      catch (error) {
 
-      fileStatus.textContent =
-        `File ready • ${
-          extractedFileText.length.toLocaleString()
-        } characters`;
+        console.error(
+          "File reading error:",
+          error
+        );
 
-    }
+        fileStatus.textContent =
+          "Unable to read this file.";
 
-    catch (error) {
+        extractedFileText = "";
 
-      console.error(
-        "File reading error:",
-        error
-      );
-
-
-      fileStatus.textContent =
-        "Unable to read this file.";
-
-      extractedFileText = "";
+      }
 
     }
+  );
 
-  }
-);
+}
 
 
 /* =============================================================
@@ -2017,15 +1649,11 @@ async function extractFileText(file) {
     file.name.toLowerCase();
 
 
-  /* TXT CSV JSON MD */
-
   if (
-
     fileName.endsWith(".txt") ||
     fileName.endsWith(".csv") ||
     fileName.endsWith(".json") ||
     fileName.endsWith(".md")
-
   ) {
 
     return await file.text();
@@ -2033,15 +1661,9 @@ async function extractFileText(file) {
   }
 
 
-  /* DOCX */
+  if (fileName.endsWith(".docx")) {
 
-  if (
-    fileName.endsWith(".docx")
-  ) {
-
-    if (
-      typeof mammoth === "undefined"
-    ) {
+    if (typeof mammoth === "undefined") {
 
       throw new Error(
         "DOCX reader unavailable."
@@ -2056,11 +1678,7 @@ async function extractFileText(file) {
 
     const result =
       await mammoth.extractRawText({
-
-        arrayBuffer:
-
-          arrayBuffer
-
+        arrayBuffer
       });
 
 
@@ -2069,11 +1687,7 @@ async function extractFileText(file) {
   }
 
 
-  /* PDF */
-
-  if (
-    fileName.endsWith(".pdf")
-  ) {
+  if (fileName.endsWith(".pdf")) {
 
     const pdfjsLib =
       await import(
@@ -2091,9 +1705,7 @@ async function extractFileText(file) {
 
     const pdf =
       await pdfjsLib.getDocument({
-
         data: arrayBuffer
-
       }).promise;
 
 
@@ -2107,9 +1719,7 @@ async function extractFileText(file) {
     ) {
 
       const page =
-        await pdf.getPage(
-          pageNumber
-        );
+        await pdf.getPage(pageNumber);
 
 
       const textContent =
@@ -2118,17 +1728,12 @@ async function extractFileText(file) {
 
       const pageText =
         textContent.items
-          .map(
-            item => item.str
-          )
+          .map(item => item.str)
           .join(" ");
 
 
       fullText +=
-        `\n\n--- Page ${pageNumber} ---\n\n`;
-
-
-      fullText += pageText;
+        `\n\n--- Page ${pageNumber} ---\n\n${pageText}`;
 
     }
 
@@ -2152,45 +1757,48 @@ async function extractFileText(file) {
 function removeSelectedFile() {
 
   selectedFile = null;
-
   extractedFileText = "";
 
-  fileInput.value = "";
 
-  filePreview.classList.add(
-    "hidden"
-  );
+  if (fileInput) {
+    fileInput.value = "";
+  }
 
-  fileNameElement.textContent = "";
 
-  fileStatus.textContent = "";
+  if (filePreview) {
+    filePreview.classList.add("hidden");
+  }
+
+
+  if (fileNameElement) {
+    fileNameElement.textContent = "";
+  }
+
+
+  if (fileStatus) {
+    fileStatus.textContent = "";
+  }
 
 }
 
 
 /* =============================================================
-   SEND CHAT MESSAGE
+   CHAT API
 ============================================================= */
 
 async function sendUserMessage(text) {
 
   if (
     !text ||
-    text.trim() === ""
+    !text.trim()
   ) {
-
     return;
-
   }
 
 
   let finalMessage =
     text.trim();
 
-
-  /* ==========================================================
-     ADD FILE CONTENT
-  ========================================================== */
 
   if (
     selectedFile &&
@@ -2211,8 +1819,7 @@ User Question:
 ${text}
 
 IMPORTANT:
-Answer the user's question using the uploaded file content
-whenever relevant.
+Answer the user's question using the uploaded file content whenever relevant.
 
 If the requested information is not present in the file,
 say that it was not found in the uploaded file.
@@ -2224,15 +1831,11 @@ Keep the answer concise and clear.
   }
 
 
-  /* SHOW USER MESSAGE */
-
   appendMessage(
     text,
     "user"
   );
 
-
-  /* FILE ATTACHMENT */
 
   if (selectedFile) {
 
@@ -2249,38 +1852,37 @@ Keep the answer concise and clear.
 
   try {
 
+    console.log(
+      "Sending request to:",
+      API_ENDPOINT
+    );
+
+
     const response =
       await fetch(
         API_ENDPOINT,
         {
-
           method: "POST",
 
           headers: {
-
             "Content-Type":
               "application/json"
-
           },
 
           body: JSON.stringify({
-
-            message:
-              finalMessage
-
+            message: finalMessage
           })
-
         }
       );
 
 
-    removeLoadingIndicator();
-
-
     if (!response.ok) {
 
+      const errorText =
+        await response.text();
+
       throw new Error(
-        `HTTP ${response.status}`
+        `HTTP ${response.status}: ${errorText}`
       );
 
     }
@@ -2290,13 +1892,25 @@ Keep the answer concise and clear.
       await response.json();
 
 
-    if (
-      data &&
-      data.response
-    ) {
+    console.log(
+      "Backend response:",
+      data
+    );
+
+
+    removeLoadingIndicator();
+
+
+    const answer =
+      data?.response ??
+      data?.message ??
+      data?.answer;
+
+
+    if (answer) {
 
       appendMessage(
-        data.response,
+        String(answer),
         "ai"
       );
 
@@ -2305,14 +1919,12 @@ Keep the answer concise and clear.
     else {
 
       appendMessage(
-        "I couldn't understand the server response.",
+        "The server responded, but no answer was returned.",
         "ai"
       );
 
     }
 
-
-    /* CLEAR FILE */
 
     removeSelectedFile();
 
@@ -2322,7 +1934,7 @@ Keep the answer concise and clear.
   catch (error) {
 
     console.error(
-      "Chat error:",
+      "Chat API error:",
       error
     );
 
@@ -2331,7 +1943,7 @@ Keep the answer concise and clear.
 
 
     appendMessage(
-      "Sorry, I couldn't connect to Quisi right now.",
+      "Sorry, I couldn't connect to Quisi right now. Please try again.",
       "ai"
     );
 
@@ -2344,55 +1956,55 @@ Keep the answer concise and clear.
    CHAT FORM
 ============================================================= */
 
-document
-  .getElementById(
+const chatForm =
+  document.getElementById(
     "popup-chat-form"
-  )
-  .addEventListener(
+  );
+
+
+const chatInput =
+  document.getElementById(
+    "popup-chat-input"
+  );
+
+
+if (chatForm) {
+
+  chatForm.addEventListener(
     "submit",
     function (event) {
 
       event.preventDefault();
 
 
-      const input =
-        document.getElementById(
-          "popup-chat-input"
-        );
-
-
       const text =
-        input.value.trim();
+        chatInput.value.trim();
 
 
-      if (!text) {
-
-        return;
-
-      }
+      if (!text) return;
 
 
-      input.value = "";
+      chatInput.value = "";
 
-      input.style.height =
+      chatInput.style.height =
         "38px";
 
 
-      sendUserMessage(
-        text
-      );
+      sendUserMessage(text);
 
     }
   );
 
+}
 
-/* ENTER SEND */
 
-document
-  .getElementById(
-    "popup-chat-input"
-  )
-  .addEventListener(
+/* =============================================================
+   ENTER TO SEND
+============================================================= */
+
+if (chatInput) {
+
+  chatInput.addEventListener(
     "keydown",
     function (event) {
 
@@ -2404,13 +2016,9 @@ document
         event.preventDefault();
 
 
-        document
-          .getElementById(
-            "popup-chat-form"
-          )
-          .dispatchEvent(
-            new Event("submit")
-          );
+        chatForm.dispatchEvent(
+          new Event("submit")
+        );
 
       }
 
@@ -2418,19 +2026,11 @@ document
   );
 
 
-/* AUTO RESIZE */
-
-document
-  .getElementById(
-    "popup-chat-input"
-  )
-  .addEventListener(
+  chatInput.addEventListener(
     "input",
     function () {
 
-      this.style.height =
-        "";
-
+      this.style.height = "";
 
       this.style.height =
         Math.min(
@@ -2440,6 +2040,8 @@ document
 
     }
   );
+
+}
 
 
 /* =============================================================
@@ -2452,22 +2054,16 @@ let isRecording = false;
 
 
 const voiceBtn =
-  document.getElementById(
-    "voice-btn"
-  );
+  document.getElementById("voice-btn");
 
 
 const voiceIcon =
-  document.getElementById(
-    "voice-icon"
-  );
+  document.getElementById("voice-icon");
 
 
 if (
-  "webkitSpeechRecognition"
-  in window ||
-  "SpeechRecognition"
-  in window
+  "webkitSpeechRecognition" in window ||
+  "SpeechRecognition" in window
 ) {
 
   const SpeechRecognition =
@@ -2479,16 +2075,11 @@ if (
     new SpeechRecognition();
 
 
-  recognition.continuous =
-    false;
+  recognition.continuous = false;
 
+  recognition.interimResults = false;
 
-  recognition.interimResults =
-    false;
-
-
-  recognition.lang =
-    "en-US";
+  recognition.lang = "en-US";
 
 
   recognition.onstart =
@@ -2499,7 +2090,6 @@ if (
       voiceBtn.classList.add(
         "recording"
       );
-
 
       voiceIcon.textContent =
         "mic_off";
@@ -2551,7 +2141,6 @@ if (
         "recording"
       );
 
-
       voiceIcon.textContent =
         "mic";
 
@@ -2599,16 +2188,22 @@ else {
    WELCOME TIME
 ============================================================= */
 
-document
-  .getElementById(
+const welcomeTime =
+  document.getElementById(
     "welcome-time"
-  )
-  .textContent =
-  formatTime(new Date());
+  );
+
+
+if (welcomeTime) {
+
+  welcomeTime.textContent =
+    formatTime(new Date());
+
+}
 
 
 /* =============================================================
-   INTERVIEW VARIABLES
+   INTERVIEW STATE
 ============================================================= */
 
 let interviewData = {
@@ -2715,36 +2310,28 @@ async function startInterview() {
 
   const name =
     document
-      .getElementById(
-        "candidate-name"
-      )
+      .getElementById("candidate-name")
       .value
       .trim();
 
 
   const email =
     document
-      .getElementById(
-        "candidate-email"
-      )
+      .getElementById("candidate-email")
       .value
       .trim();
 
 
   const role =
     document
-      .getElementById(
-        "candidate-role"
-      )
+      .getElementById("candidate-role")
       .value
       .trim();
 
 
   const domain =
     document
-      .getElementById(
-        "candidate-domain"
-      )
+      .getElementById("candidate-domain")
       .value
       .trim();
 
@@ -2834,6 +2421,12 @@ async function getInterviewQuestion() {
     );
 
 
+  const submitButton =
+    document.getElementById(
+      "submit-answer-btn"
+    );
+
+
   questionBox.textContent =
     "Generating question...";
 
@@ -2844,7 +2437,23 @@ async function getInterviewQuestion() {
     }/5`;
 
 
+  if (submitButton) {
+
+    submitButton.disabled = true;
+
+    submitButton.textContent =
+      "Generating Question...";
+
+  }
+
+
   try {
+
+    console.log(
+      "Interview question request:",
+      INTERVIEW_QUESTION_ENDPOINT
+    );
+
 
     const response =
       await fetch(
@@ -2854,10 +2463,8 @@ async function getInterviewQuestion() {
           method: "POST",
 
           headers: {
-
             "Content-Type":
               "application/json"
-
           },
 
           body: JSON.stringify({
@@ -2866,7 +2473,14 @@ async function getInterviewQuestion() {
               interviewData.role,
 
             domain:
-              interviewData.domain
+              interviewData.domain,
+
+            previous_answer:
+              interviewData.questionsAnswers.length
+                ? interviewData.questionsAnswers[
+                    interviewData.questionsAnswers.length - 1
+                  ].answer
+                : null
 
           })
 
@@ -2876,8 +2490,11 @@ async function getInterviewQuestion() {
 
     if (!response.ok) {
 
+      const errorText =
+        await response.text();
+
       throw new Error(
-        `HTTP ${response.status}`
+        `HTTP ${response.status}: ${errorText}`
       );
 
     }
@@ -2887,11 +2504,26 @@ async function getInterviewQuestion() {
       await response.json();
 
 
+    console.log(
+      "Interview question response:",
+      data
+    );
+
+
     interviewData.currentQuestion =
       data.question ||
       data.response ||
       data.message ||
       "";
+
+
+    if (!interviewData.currentQuestion) {
+
+      throw new Error(
+        "No question returned by backend."
+      );
+
+    }
 
 
     questionBox.textContent =
@@ -2909,7 +2541,21 @@ async function getInterviewQuestion() {
 
 
     questionBox.textContent =
-      "Unable to generate interview question. Please check your backend endpoint.";
+      "Unable to generate interview question. Please try again.";
+
+  }
+
+
+  finally {
+
+    if (submitButton) {
+
+      submitButton.disabled = false;
+
+      submitButton.textContent =
+        "Submit Answer";
+
+    }
 
   }
 
@@ -2928,6 +2574,12 @@ async function submitInterviewAnswer() {
     );
 
 
+  const submitButton =
+    document.getElementById(
+      "submit-answer-btn"
+    );
+
+
   const answer =
     answerBox.value.trim();
 
@@ -2936,6 +2588,17 @@ async function submitInterviewAnswer() {
 
     alert(
       "Please enter your answer."
+    );
+
+    return;
+
+  }
+
+
+  if (!interviewData.currentQuestion) {
+
+    alert(
+      "Interview question is not available."
     );
 
     return;
@@ -2958,6 +2621,16 @@ async function submitInterviewAnswer() {
 
 
   interviewData.questionNumber++;
+
+
+  if (submitButton) {
+
+    submitButton.disabled = true;
+
+    submitButton.textContent =
+      "Processing...";
+
+  }
 
 
   if (
@@ -2996,7 +2669,29 @@ async function finishInterview() {
     .classList.remove("hidden");
 
 
+  document
+    .getElementById(
+      "result-status"
+    )
+    .textContent =
+    "Evaluating...";
+
+
+  document
+    .getElementById(
+      "short-feedback"
+    )
+    .textContent =
+    "Quisi is evaluating your interview answers...";
+
+
   try {
+
+    console.log(
+      "Interview evaluation request:",
+      INTERVIEW_EVALUATION_ENDPOINT
+    );
+
 
     const response =
       await fetch(
@@ -3031,8 +2726,11 @@ async function finishInterview() {
 
     if (!response.ok) {
 
+      const errorText =
+        await response.text();
+
       throw new Error(
-        `HTTP ${response.status}`
+        `HTTP ${response.status}: ${errorText}`
       );
 
     }
@@ -3040,6 +2738,12 @@ async function finishInterview() {
 
     const data =
       await response.json();
+
+
+    console.log(
+      "Interview evaluation response:",
+      data
+    );
 
 
     displayInterviewResult(
@@ -3057,10 +2761,6 @@ async function finishInterview() {
     );
 
 
-    /*
-       FALLBACK RESULT
-    */
-
     displayInterviewResult({
 
       overall_score: 0,
@@ -3076,7 +2776,7 @@ async function finishInterview() {
       areas_for_improvement: [],
 
       final_feedback:
-        "Interview evaluation could not be retrieved."
+        "Interview evaluation could not be retrieved from the backend."
 
     });
 
@@ -3086,47 +2786,42 @@ async function finishInterview() {
 
 
 /* =============================================================
-   DISPLAY RESULT
+   DISPLAY INTERVIEW RESULT
 ============================================================= */
 
 function displayInterviewResult(data) {
 
-  let overall =
+  const overall =
     Number(
-      data.overall_score ??
-      data.overall ??
+      data?.overall_score ??
+      data?.overall ??
       0
     );
 
 
-  let technical =
+  const technical =
     Number(
-      data.technical_score ??
-      data.technical ??
+      data?.technical_score ??
+      data?.technical ??
       0
     );
 
 
-  let communication =
+  const communication =
     Number(
-      data.communication_score ??
-      data.communication ??
+      data?.communication_score ??
+      data?.communication ??
       0
     );
 
 
-  let problemSolving =
+  const problemSolving =
     Number(
-      data.problem_solving_score ??
-      data.problem_solving ??
+      data?.problem_solving_score ??
+      data?.problem_solving ??
       0
     );
 
-
-  /*
-     IMPORTANT:
-     6/10 OR ABOVE = SELECTED
-  */
 
   const selected =
     overall >= 6;
@@ -3182,8 +2877,6 @@ function displayInterviewResult(data) {
     `${problemSolving}/10`;
 
 
-  /* STATUS ICON */
-
   const icon =
     document.getElementById(
       "result-icon"
@@ -3220,8 +2913,6 @@ function displayInterviewResult(data) {
 
   }
 
-
-  /* SKILLS */
 
   const skillsList =
     document.getElementById(
@@ -3268,18 +2959,14 @@ function displayInterviewResult(data) {
   );
 
 
-  /* FEEDBACK */
-
   let feedback =
-    data.final_feedback ||
-    data.feedback ||
+    data?.final_feedback ||
+    data?.feedback ||
     "";
 
 
   if (
-    Array.isArray(
-      data.strengths
-    ) &&
+    Array.isArray(data?.strengths) &&
     data.strengths.length
   ) {
 
@@ -3312,7 +2999,7 @@ function displayInterviewResult(data) {
 
 
 /* =============================================================
-   CLOSE MODAL WHEN CLICK OUTSIDE
+   CLOSE MODAL OUTSIDE CLICK
 ============================================================= */
 
 document
@@ -3335,8 +3022,20 @@ document
   );
 
 
-</script>
+/* =============================================================
+   BACKEND CONNECTION CHECK
+============================================================= */
 
+console.log(
+  "Inquisitors Society frontend loaded."
+);
+
+console.log(
+  "Public backend:",
+  BACKEND_URL
+);
+
+</script>
 
 </body>
 </html>
