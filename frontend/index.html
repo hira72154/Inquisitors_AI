@@ -1,381 +1,3342 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Inquisitors Society</title>
-  <style>
-    @layer base {
-      html, body { margin: 0; padding: 0; }
-      body { overscroll-behavior: none; }
-    }
-    ::-webkit-scrollbar { display: none; }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- =========================================================
+       GOOGLE FONTS
+  ========================================================== -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- =========================================================
+       MATERIAL ICONS
+  ========================================================== -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet"
+  >
+
+  <!-- =========================================================
+       TAILWIND
+  ========================================================== -->
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <script id="tailwind-config">
+
+  <script>
+
     tailwind.config = {
+
       theme: {
+
         extend: {
+
           colors: {
-            "primary": "#006578",
+
+            primary: "#006578",
             "primary-container": "#008097",
-            "on-primary": "#ffffff",
-            "on-primary-container": "#f9fdff",
-            "secondary": "#7c5800",
+
+            secondary: "#7c5800",
             "secondary-container": "#feb700",
-            "on-secondary-container": "#6b4b00",
-            "surface": "#ffffff",
+
+            surface: "#ffffff",
             "surface-container": "#f8f9ff",
             "surface-container-low": "#eff4ff",
             "surface-container-high": "#e5eeff",
-            "surface-container-lowest": "#ffffff",
+
             "on-surface": "#0b1c30",
             "on-surface-variant": "#40484c",
-            "outline": "#6d797d",
+
+            outline: "#6d797d",
             "outline-variant": "#bdc8cd"
           },
+
           fontFamily: {
-            "display": ["Hanken Grotesk", "sans-serif"],
-            "body": ["Inter", "sans-serif"]
+
+            display: ["Hanken Grotesk", "sans-serif"],
+            body: ["Inter", "sans-serif"]
+
           }
+
         }
+
       }
+
     };
+
   </script>
-</head>
-<body class="bg-surface font-body text-on-surface min-h-full flex flex-col relative selection:bg-primary/10">
 
-  <!-- MINIMAL MAIN NAVIGATION -->
-  <header class="w-full h-20 px-8 md:px-16 flex items-center justify-between border-b border-outline-variant/20 bg-surface/90 backdrop-blur-md sticky top-0 z-30">
-    <div class="flex items-center gap-4">
-      <img alt="Inquisitors Society Logo" class="h-10 w-auto object-contain" src="assests/inquisitors_logo.png"/>
-      <span class="font-display font-bold text-xl tracking-tight text-on-surface">Inquisitors Society</span>
-    </div>
-    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-on-surface-variant">
-      <a href="#" class="hover:text-primary transition-colors">Research</a>
-      <a href="#" class="hover:text-primary transition-colors">Publications</a>
-      <a href="#" class="hover:text-primary transition-colors">About Us</a>
-      <a href="#" class="hover:text-primary transition-colors">Contact</a>
-    </nav>
-  </header>
 
-  <!-- CLEAN MINIMAL MAIN CONTENT (Lots of whitespace) -->
-  <main class="flex-1 flex flex-col items-center justify-center text-center px-6 py-20 max-w-4xl mx-auto">
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container border border-outline-variant/30 text-xs font-semibold text-primary mb-6 shadow-sm">
-      <span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
-      Intellectual Curiosity &amp; Advanced Research
-    </div>
-    
-    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-on-surface leading-[1.15] mb-6">
-      Exploring boundaries,<br/>uncovering knowledge.
-    </h1>
-    
-    <p class="text-body text-lg text-on-surface-variant max-w-2xl leading-relaxed mb-10">
-      Welcome to the official portal of Inquisitors Society. Our platform brings together researchers, scholars, and innovators dedicated to rigorous inquiry.
-    </p>
+  <!-- =========================================================
+       PDF READER
+  ========================================================== -->
 
-    <div class="flex flex-wrap items-center justify-center gap-4">
-      <button onclick="toggleChat()" class="px-6 py-3.5 rounded-xl bg-primary text-on-primary font-semibold text-sm shadow-md hover:bg-primary-container transition-all flex items-center gap-2">
-        <span class="material-symbols-outlined text-[20px]">chat</span>
-        Talk to Quisi AI
-      </button>
-      <a href="#" class="px-6 py-3.5 rounded-xl bg-surface-container text-on-surface font-semibold text-sm border border-outline-variant/30 hover:bg-surface-container-high transition-all">
-        Learn More
-      </a>
-    </div>
-  </main>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs"
+    type="module">
+  </script>
 
-  <!-- FOOTER -->
-  <footer class="py-8 px-8 border-t border-outline-variant/20 text-center text-xs text-on-surface-variant/60">
-    &copy; 2026 Inquisitors Society. All rights reserved.
-  </footer>
 
-  <!-- FLOATING QUISI ROBOT BUTTON & TOOLTIP (BOTTOM-RIGHT) -->
-  <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
-    <!-- SUBTLE TOOLTIP / BUBBLE -->
-    <div id="quisi-tooltip" class="bg-surface-container-lowest text-on-surface border border-outline-variant/30 shadow-lg px-3.5 py-2 rounded-2xl text-xs font-medium flex items-center gap-2 animate-[fade-in-up_0.5s_ease-out] transition-all">
-      <span>Hi, I'm Quisi 👋</span>
-      <button onclick="dismissTooltip(event)" class="text-on-surface-variant hover:text-on-surface text-xs font-bold leading-none p-0.5">✕</button>
-    </div>
+  <!-- =========================================================
+       DOCX READER
+  ========================================================== -->
 
-    <!-- FLOATING ROBOT BUTTON -->
-    <button id="quisi-robot-btn" onclick="toggleChat()" title="Chat with Quisi AI" class="relative group w-16 h-16 bg-transparent border-none outline-none flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer p-0">
-      <img alt="Quisi Robot" class="w-16 h-16 object-contain relative z-10 filter drop-shadow-md animate-[float_4s_ease-in-out_infinite]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA" style="animation: float 4s ease-in-out infinite;"/>
-      <!-- ONLINE BADGE -->
-      <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-secondary-container rounded-full border-2 border-surface z-20"></span>
-    </button>
-  </div>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js">
+  </script>
 
-  <!-- FLOATING CHATBOT POPUP PANEL (BOTTOM-RIGHT) -->
-  <div id="quisi-chat-popup" class="fixed bottom-24 right-4 sm:right-6 w-[calc(100vw-32px)] sm:w-[400px] h-[580px] max-h-[calc(100vh-120px)] bg-surface-container-lowest border border-outline-variant/30 rounded-3xl shadow-[0_16px_48px_rgba(0,0,0,0.15)] z-50 flex flex-col overflow-hidden hidden transition-all duration-300 transform scale-95 opacity-0">
-    
-    <!-- CHAT POPUP HEADER -->
-    <div class="px-5 py-4 bg-surface-container border-b border-outline-variant/20 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="relative w-10 h-10 rounded-full bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center overflow-hidden shadow-sm flex-shrink-0">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA" alt="Quisi Avatar" class="w-8 h-8 object-contain">
-        </div>
-        <div class="flex flex-col">
-          <div class="flex items-center gap-2">
-            <span class="font-display font-bold text-base text-on-surface leading-none">Quisi</span>
-            <span class="w-2 h-2 rounded-full bg-secondary-container"></span>
-            <span class="text-[10px] uppercase tracking-wider font-semibold text-secondary">Online</span>
-          </div>
-          <span class="text-xs text-on-surface-variant leading-tight mt-0.5">Inquisitors Society AI Companion</span>
-        </div>
-      </div>
-      
-      <div class="flex items-center gap-1">
-        <img alt="Inquisitors Logo" class="h-6 w-auto object-contain mr-1 opacity-70" src="assests/inquisitors_logo.png"/>
-        <button onclick="toggleChat()" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Close">
-          <span class="material-symbols-outlined text-[20px]">close</span>
-        </button>
-      </div>
-    </div>
 
-    <!-- CHAT MESSAGES CONTAINER -->
-    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 flex flex-col gap-4 custom-scrollbar bg-surface/50">
-      <!-- Initial Welcome Message -->
-      <div class="flex flex-col gap-1.5 max-w-[88%] self-start">
-        <div class="flex items-end gap-2.5">
-          <div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant/30 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-xs">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA" alt="Quisi Avatar" class="w-6.5 h-6.5 object-contain">
-          </div>
-          <div class="bg-surface-container-lowest text-on-surface px-4 py-3 rounded-2xl rounded-bl-xs shadow-xs border border-outline-variant/20 text-sm leading-relaxed">
-            Hi, I'm Quisi! 👋<br/>How can I help you?
-          </div>
-        </div>
-        <span class="text-[10px] text-on-surface-variant/70 font-medium ml-10" id="welcome-time"></span>
-      </div>
-    </div>
-
-    <!-- CHAT INPUT AREA -->
-    <div class="p-3 bg-surface-container-lowest border-t border-outline-variant/20">
-      <form id="popup-chat-form" class="relative bg-surface-container rounded-2xl p-1.5 flex items-end gap-1.5 border border-outline-variant/30 focus-within:border-primary/50 transition-colors">
-        <button type="button" class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container-high flex-shrink-0 mb-0.5" title="Attach file">
-          <span class="material-symbols-outlined text-[20px]">attach_file</span>
-        </button>
-
-        <textarea id="popup-chat-input" rows="1" placeholder="Ask Quisi anything..." class="w-full bg-transparent border-none focus:ring-0 resize-none py-2 px-1 text-sm text-on-surface placeholder:text-on-surface-variant/50 max-h-24 custom-scrollbar min-h-[38px]" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
-
-        <div class="flex items-center gap-1 mb-0.5 flex-shrink-0">
-          <button type="button" class="w-9 h-9 flex items-center justify-center text-secondary-container bg-secondary-container/10 hover:bg-secondary-container hover:text-on-secondary-container rounded-full transition-colors" title="Voice Input">
-            <span class="material-symbols-outlined text-[18px]">mic</span>
-          </button>
-          <button type="submit" id="popup-send-btn" class="w-9 h-9 flex items-center justify-center bg-primary text-on-primary rounded-full hover:bg-primary-container transition-all shadow-xs" title="Send">
-            <span class="material-symbols-outlined text-[18px]">send</span>
-          </button>
-        </div>
-      </form>
-      <div class="text-center mt-2">
-        <span class="text-[9px] text-on-surface-variant/50 font-medium uppercase tracking-wider">Quisi — Inquisitors Society AI Companion</span>
-      </div>
-    </div>
-
-  </div>
+  <!-- =========================================================
+       BASIC STYLE
+  ========================================================== -->
 
   <style>
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+
+    html,
+    body {
+
+      margin: 0;
+      padding: 0;
+
     }
-    @keyframes fade-in-up {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    body {
+
+      overscroll-behavior: none;
+
     }
-    .custom-scrollbar::-webkit-scrollbar {
+
+    ::-webkit-scrollbar {
+
       width: 5px;
+
     }
-    .custom-scrollbar::-webkit-scrollbar-track {
+
+    ::-webkit-scrollbar-track {
+
       background: transparent;
+
     }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background-color: rgba(189, 200, 205, 0.4);
+
+    ::-webkit-scrollbar-thumb {
+
+      background: rgba(109,121,125,0.25);
       border-radius: 10px;
+
     }
-    .custom-scrollbar:hover::-webkit-scrollbar-thumb {
-      background-color: rgba(189, 200, 205, 0.8);
+
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================== */
+
+    @keyframes float {
+
+      0%,
+      100% {
+
+        transform: translateY(0);
+
+      }
+
+      50% {
+
+        transform: translateY(-7px);
+
+      }
+
     }
+
+
+    @keyframes fadeIn {
+
+      from {
+
+        opacity: 0;
+        transform: translateY(10px);
+
+      }
+
+      to {
+
+        opacity: 1;
+        transform: translateY(0);
+
+      }
+
+    }
+
+
+    @keyframes popup {
+
+      from {
+
+        opacity: 0;
+        transform: scale(0.95);
+
+      }
+
+      to {
+
+        opacity: 1;
+        transform: scale(1);
+
+      }
+
+    }
+
+
+    .animate-float {
+
+      animation: float 4s ease-in-out infinite;
+
+    }
+
+
+    .animate-fade {
+
+      animation: fadeIn 0.25s ease-out;
+
+    }
+
+
+    .chat-popup-animation {
+
+      animation: popup 0.25s ease-out;
+
+    }
+
+
+    /* =========================================================
+       MODAL BACKDROP
+    ========================================================== */
+
+    .modal-backdrop {
+
+      background: rgba(11, 28, 48, 0.35);
+      backdrop-filter: blur(5px);
+
+    }
+
+
+    /* =========================================================
+       VOICE RECORDING
+    ========================================================== */
+
+    .recording {
+
+      animation: pulse 1s infinite;
+
+    }
+
+    @keyframes pulse {
+
+      0% {
+
+        box-shadow: 0 0 0 0 rgba(0,101,120,0.4);
+
+      }
+
+      70% {
+
+        box-shadow: 0 0 0 12px rgba(0,101,120,0);
+
+      }
+
+      100% {
+
+        box-shadow: 0 0 0 0 rgba(0,101,120,0);
+
+      }
+
+    }
+
   </style>
 
-  <script>
-    const API_ENDPOINT = "http://127.0.0.1:8000/chat";
-    const AVATAR_URL = "https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA";
+</head>
 
-    // Set welcome time stamp
-    document.getElementById('welcome-time').innerText = formatTime(new Date());
 
-    function formatTime(date) {
-      return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-    }
+<body
+  class="bg-white text-on-surface font-body min-h-full flex flex-col"
+>
 
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.innerText = text;
-      return div.innerHTML;
-    }
 
-    function scrollToBottom() {
-      const container = document.getElementById('chat-messages');
-      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
-    }
+<!-- ============================================================
+     NAVBAR
+============================================================= -->
 
-    function dismissTooltip(e) {
-      if (e) e.stopPropagation();
-      const tooltip = document.getElementById('quisi-tooltip');
-      if (tooltip) tooltip.classList.add('hidden');
-    }
+<header
+  class="w-full h-20 px-6 md:px-12 flex items-center justify-between
+         border-b border-outline-variant/20 bg-white/95
+         backdrop-blur-md sticky top-0 z-40"
+>
 
-    function toggleChat() {
-      const popup = document.getElementById('quisi-chat-popup');
-      if (popup.classList.contains('hidden')) {
-        // Open Popup
-        popup.classList.remove('hidden');
-        setTimeout(() => {
-          popup.classList.remove('scale-95', 'opacity-0');
-          popup.classList.add('scale-100', 'opacity-100');
-        }, 10);
-        document.getElementById('popup-chat-input').focus();
-        scrollToBottom();
-      } else {
-        // Close Popup
-        popup.classList.remove('scale-100', 'opacity-100');
-        popup.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-          popup.classList.add('hidden');
-        }, 300);
-      }
-    }
+  <!-- LOGO -->
 
-    function appendMessage(text, sender) {
-      const chatMessages = document.getElementById('chat-messages');
-      const time = formatTime(new Date());
-      const safeText = escapeHtml(text).replace(/\n/g, '<br>');
-      let messageHtml = '';
+  <div class="flex items-center gap-3">
 
-      if (sender === 'user') {
-        messageHtml = `
-          <div class="flex flex-col gap-1.5 max-w-[88%] self-end animate-[fade-in-up_0.25s_ease-out]">
-            <div class="flex items-end gap-2 flex-row-reverse">
-              <div class="w-7 h-7 rounded-full bg-primary flex-shrink-0 flex items-center justify-center shadow-xs">
-                <span class="material-symbols-outlined text-on-primary text-[16px]">person</span>
-              </div>
-              <div class="bg-primary text-on-primary px-4 py-3 rounded-2xl rounded-br-xs shadow-xs text-sm leading-relaxed">
-                ${safeText}
-              </div>
-            </div>
-            <span class="text-[10px] text-on-surface-variant/70 font-medium mr-9 self-end">${time}</span>
-          </div>
-        `;
-      } else {
-        messageHtml = `
-          <div class="flex flex-col gap-1.5 max-w-[88%] self-start animate-[fade-in-up_0.25s_ease-out]">
-            <div class="flex items-end gap-2.5">
-              <div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant/30 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-xs">
-                <img src="${AVATAR_URL}" alt="Quisi Avatar" class="w-6.5 h-6.5 object-contain">
-              </div>
-              <div class="bg-surface-container-lowest text-on-surface px-4 py-3 rounded-2xl rounded-bl-xs shadow-xs border border-outline-variant/20 text-sm leading-relaxed">
-                ${safeText}
-              </div>
-            </div>
-            <span class="text-[10px] text-on-surface-variant/70 font-medium ml-10">${time}</span>
-          </div>
-        `;
-      }
+    <img
+      src="assests/inquisitors_logo.png"
+      alt="Inquisitors Society"
+      class="h-10 w-auto object-contain"
+    >
 
-      chatMessages.insertAdjacentHTML('beforeend', messageHtml);
-      scrollToBottom();
-    }
+    <span
+      class="font-display font-bold text-lg md:text-xl"
+    >
+      Inquisitors Society
+    </span>
 
-    function showLoadingIndicator() {
-      const chatMessages = document.getElementById('chat-messages');
-      const loadingHtml = `
-        <div id="loading-indicator" class="flex flex-col gap-1.5 max-w-[88%] self-start animate-[fade-in-up_0.25s_ease-out]">
-          <div class="flex items-end gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant/30 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-xs">
-              <img src="${AVATAR_URL}" alt="Quisi Avatar" class="w-6.5 h-6.5 object-contain">
-            </div>
-            <div class="bg-surface-container-lowest text-on-surface-variant px-4 py-3 rounded-2xl rounded-bl-xs shadow-xs border border-outline-variant/20 text-sm flex items-center gap-2.5">
-              <span class="inline-flex gap-1 items-center">
-                <span class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style="animation-delay: 0ms"></span>
-                <span class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style="animation-delay: 150ms"></span>
-                <span class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style="animation-delay: 300ms"></span>
-              </span>
-              <span class="text-xs font-medium text-on-surface-variant">Quisi is thinking...</span>
-            </div>
-          </div>
+  </div>
+
+
+  <!-- NAVIGATION -->
+
+  <nav
+    class="hidden md:flex items-center gap-7
+           text-sm font-medium text-on-surface-variant"
+  >
+
+    <a href="#" class="hover:text-primary transition">
+      Research
+    </a>
+
+    <a href="#" class="hover:text-primary transition">
+      Publications
+    </a>
+
+    <a href="#" class="hover:text-primary transition">
+      About Us
+    </a>
+
+    <a href="#" class="hover:text-primary transition">
+      Contact
+    </a>
+
+  </nav>
+
+
+  <!-- RIGHT SIDE -->
+
+  <div class="flex items-center gap-3">
+
+    <!-- INTERVIEW BUTTON -->
+
+    <button
+      onclick="openInterview()"
+      class="hidden sm:flex items-center gap-2
+             px-4 py-2.5 rounded-xl
+             bg-primary text-white
+             text-sm font-semibold
+             hover:bg-primary-container
+             transition shadow-sm"
+    >
+
+      <span class="material-symbols-outlined text-[19px]">
+        work
+      </span>
+
+      AI Interview
+
+    </button>
+
+
+    <!-- MOBILE INTERVIEW -->
+
+    <button
+      onclick="openInterview()"
+      class="sm:hidden w-10 h-10 rounded-xl
+             bg-primary text-white
+             flex items-center justify-center"
+    >
+
+      <span class="material-symbols-outlined">
+        work
+      </span>
+
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- ============================================================
+     MAIN SCREEN
+============================================================= -->
+
+<main
+  class="flex-1 bg-white min-h-[calc(100vh-144px)]"
+>
+
+  <!-- EMPTY / CLEAN LIGHT AREA -->
+
+  <div
+    class="w-full h-full min-h-[calc(100vh-144px)]
+           bg-white"
+  >
+  </div>
+
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================= -->
+
+<footer
+  class="py-6 px-8
+         border-t border-outline-variant/20
+         text-center text-xs
+         text-on-surface-variant/60
+         bg-white"
+>
+
+  © 2026 Inquisitors Society.
+  All rights reserved.
+
+</footer>
+
+
+<!-- ============================================================
+     QUISI FLOATING BUTTON
+============================================================= -->
+
+<div
+  class="fixed bottom-6 right-6 z-50"
+>
+
+  <!-- TOOLTIP -->
+
+  <div
+    id="quisi-tooltip"
+    class="absolute right-20 bottom-3
+           whitespace-nowrap
+           bg-white
+           border border-outline-variant/30
+           shadow-lg
+           px-4 py-2.5
+           rounded-2xl
+           text-xs font-medium
+           flex items-center gap-2"
+  >
+
+    <span>
+      Hi, I'm Quisi 👋
+    </span>
+
+    <button
+      onclick="dismissTooltip(event)"
+      class="text-on-surface-variant hover:text-primary"
+    >
+
+      ×
+
+    </button>
+
+  </div>
+
+
+  <!-- CIRCULAR ROBOT -->
+
+  <button
+    onclick="toggleChat()"
+    title="Talk to Quisi"
+    class="relative
+           w-20 h-20
+           rounded-full
+           bg-white
+           border-2 border-primary/20
+           shadow-xl
+           flex items-center justify-center
+           hover:scale-110
+           active:scale-95
+           transition-all
+           overflow-hidden"
+  >
+
+    <img
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA"
+      alt="Quisi"
+      class="w-16 h-16 object-contain animate-float"
+    >
+
+    <!-- ONLINE -->
+
+    <span
+      class="absolute bottom-1 right-1
+             w-4 h-4
+             rounded-full
+             bg-secondary-container
+             border-2 border-white"
+    ></span>
+
+  </button>
+
+</div>
+
+
+<!-- ============================================================
+     QUISI CHATBOT
+============================================================= -->
+
+<div
+  id="quisi-chat-popup"
+  class="hidden fixed
+         bottom-28 right-4 md:right-6
+         w-[calc(100vw-32px)]
+         sm:w-[430px]
+         h-[620px]
+         max-h-[calc(100vh-120px)]
+         bg-white
+         rounded-3xl
+         shadow-[0_20px_60px_rgba(0,0,0,0.18)]
+         border border-outline-variant/30
+         z-50
+         overflow-hidden
+         flex-col"
+>
+
+
+  <!-- CHAT HEADER -->
+
+  <div
+    class="px-5 py-4
+           bg-surface-container
+           border-b border-outline-variant/20
+           flex items-center justify-between"
+  >
+
+    <div class="flex items-center gap-3">
+
+      <div
+        class="w-11 h-11
+               rounded-full
+               bg-white
+               border border-outline-variant/30
+               flex items-center justify-center
+               overflow-hidden"
+      >
+
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA"
+          alt="Quisi"
+          class="w-9 h-9 object-contain"
+        >
+
+      </div>
+
+
+      <div>
+
+        <div class="flex items-center gap-2">
+
+          <span
+            class="font-display font-bold"
+          >
+            Quisi
+          </span>
+
+          <span
+            class="w-2 h-2 rounded-full
+                   bg-secondary-container"
+          ></span>
+
+          <span
+            class="text-[10px] uppercase
+                   tracking-wider
+                   font-semibold text-secondary"
+          >
+            Online
+          </span>
+
         </div>
-      `;
-      chatMessages.insertAdjacentHTML('beforeend', loadingHtml);
+
+        <span
+          class="text-xs text-on-surface-variant"
+        >
+          Inquisitors Society AI Companion
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- CLOSE -->
+
+    <button
+      onclick="toggleChat()"
+      class="w-9 h-9 rounded-full
+             flex items-center justify-center
+             hover:bg-surface-container-high"
+    >
+
+      <span class="material-symbols-outlined">
+        close
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================================================
+       CHAT MESSAGES
+  ========================================================= -->
+
+  <div
+    id="chat-messages"
+    class="flex-1 overflow-y-auto
+           p-4 flex flex-col gap-4
+           bg-white"
+  >
+
+    <!-- WELCOME -->
+
+    <div
+      class="flex flex-col gap-1.5
+             max-w-[88%] self-start
+             animate-fade"
+    >
+
+      <div class="flex items-end gap-2.5">
+
+        <div
+          class="w-8 h-8 rounded-full
+                 bg-surface-container
+                 border border-outline-variant/30
+                 flex items-center justify-center
+                 overflow-hidden flex-shrink-0"
+        >
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA"
+            class="w-6 h-6 object-contain"
+            alt="Quisi"
+          >
+
+        </div>
+
+
+        <div
+          class="bg-surface-container
+                 px-4 py-3
+                 rounded-2xl rounded-bl-sm
+                 text-sm leading-relaxed"
+        >
+
+          Hi, I'm Quisi! 👋
+          <br>
+          How can I help you?
+
+        </div>
+
+      </div>
+
+      <span
+        id="welcome-time"
+        class="text-[10px]
+               text-on-surface-variant/60
+               ml-10"
+      ></span>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       FILE PREVIEW
+  ========================================================= -->
+
+  <div
+    id="file-preview"
+    class="hidden mx-3 mb-2
+           px-3 py-2.5
+           rounded-xl
+           bg-surface-container
+           border border-outline-variant/30"
+  >
+
+    <div class="flex items-center justify-between gap-2">
+
+      <div
+        class="flex items-center gap-2 min-w-0"
+      >
+
+        <span
+          class="material-symbols-outlined
+                 text-primary"
+        >
+          description
+        </span>
+
+        <span
+          id="file-name"
+          class="truncate
+                 text-xs
+                 font-semibold"
+        ></span>
+
+      </div>
+
+
+      <button
+        type="button"
+        onclick="removeSelectedFile()"
+        class="text-on-surface-variant
+               hover:text-primary"
+      >
+
+        <span
+          class="material-symbols-outlined text-[18px]"
+        >
+          close
+        </span>
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="file-status"
+      class="text-[10px]
+             text-on-surface-variant
+             mt-1"
+    >
+      Reading file...
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       CHAT INPUT
+  ========================================================= -->
+
+  <div
+    class="p-3
+           bg-white
+           border-t border-outline-variant/20"
+  >
+
+    <form
+      id="popup-chat-form"
+      class="bg-surface-container
+             rounded-2xl
+             p-1.5
+             flex items-end gap-1.5
+             border border-outline-variant/30"
+    >
+
+      <!-- FILE BUTTON -->
+
+      <button
+        type="button"
+        id="attach-file-btn"
+        title="Upload file"
+        class="p-2
+               text-on-surface-variant
+               hover:text-primary
+               rounded-full
+               hover:bg-surface-container-high
+               flex-shrink-0"
+      >
+
+        <span
+          class="material-symbols-outlined text-[20px]"
+        >
+          attach_file
+        </span>
+
+      </button>
+
+
+      <!-- REAL FILE INPUT -->
+
+      <input
+        type="file"
+        id="file-input"
+        class="hidden"
+        accept=".txt,.pdf,.docx,.csv,.json,.md"
+      >
+
+
+      <!-- TEXT INPUT -->
+
+      <textarea
+        id="popup-chat-input"
+        rows="1"
+        placeholder="Ask Quisi anything..."
+        class="w-full
+               bg-transparent
+               border-none
+               outline-none
+               resize-none
+               py-2 px-1
+               text-sm
+               max-h-24
+               min-h-[38px]"
+      ></textarea>
+
+
+      <div
+        class="flex items-center gap-1
+               mb-0.5 flex-shrink-0"
+      >
+
+        <!-- VOICE -->
+
+        <button
+          type="button"
+          id="voice-btn"
+          title="Voice input"
+          class="w-9 h-9
+                 flex items-center justify-center
+                 text-secondary
+                 bg-secondary-container/10
+                 hover:bg-secondary-container
+                 rounded-full
+                 transition"
+        >
+
+          <span
+            id="voice-icon"
+            class="material-symbols-outlined text-[18px]"
+          >
+            mic
+          </span>
+
+        </button>
+
+
+        <!-- SEND -->
+
+        <button
+          type="submit"
+          id="popup-send-btn"
+          title="Send"
+          class="w-9 h-9
+                 flex items-center justify-center
+                 bg-primary
+                 text-white
+                 rounded-full
+                 hover:bg-primary-container
+                 transition"
+        >
+
+          <span
+            class="material-symbols-outlined text-[18px]"
+          >
+            send
+          </span>
+
+        </button>
+
+      </div>
+
+    </form>
+
+
+    <div
+      class="text-center mt-2"
+    >
+
+      <span
+        class="text-[9px]
+               text-on-surface-variant/50
+               font-medium
+               uppercase
+               tracking-wider"
+      >
+        Quisi — Inquisitors Society AI Companion
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     INTERVIEW MODAL
+============================================================= -->
+
+<div
+  id="interview-modal"
+  class="hidden fixed inset-0
+         modal-backdrop
+         z-[100]
+         items-center justify-center
+         p-4"
+>
+
+
+  <!-- INTERVIEW CARD -->
+
+  <div
+    class="w-full max-w-2xl
+           max-h-[92vh]
+           overflow-y-auto
+           bg-white
+           rounded-3xl
+           shadow-2xl"
+  >
+
+
+    <!-- HEADER -->
+
+    <div
+      class="px-6 py-5
+             bg-surface-container
+             border-b border-outline-variant/20
+             flex items-center justify-between"
+    >
+
+      <div>
+
+        <h2
+          class="font-display
+                 font-bold
+                 text-xl"
+        >
+          AI Mock Interview
+        </h2>
+
+        <p
+          class="text-xs
+                 text-on-surface-variant
+                 mt-1"
+        >
+          Practice your interview with Quisi
+        </p>
+
+      </div>
+
+
+      <button
+        onclick="closeInterview()"
+        class="w-9 h-9
+               rounded-full
+               hover:bg-surface-container-high
+               flex items-center justify-center"
+      >
+
+        <span class="material-symbols-outlined">
+          close
+        </span>
+
+      </button>
+
+    </div>
+
+
+    <!-- ======================================================
+         ENROLLMENT
+    ======================================================= -->
+
+    <div
+      id="interview-enrollment"
+      class="p-6"
+    >
+
+      <div
+        class="mb-6"
+      >
+
+        <div
+          class="w-12 h-12
+                 rounded-2xl
+                 bg-primary/10
+                 flex items-center justify-center
+                 mb-4"
+        >
+
+          <span
+            class="material-symbols-outlined
+                   text-primary text-[28px]"
+          >
+            person_add
+          </span>
+
+        </div>
+
+
+        <h3
+          class="font-display
+                 font-bold
+                 text-lg"
+        >
+          Candidate Registration
+        </h3>
+
+        <p
+          class="text-sm
+                 text-on-surface-variant
+                 mt-1"
+        >
+          Enter your details before starting the interview.
+        </p>
+
+      </div>
+
+
+      <div class="space-y-4">
+
+
+        <!-- NAME -->
+
+        <div>
+
+          <label
+            class="block text-xs
+                   font-semibold
+                   mb-1.5"
+          >
+            Full Name
+          </label>
+
+          <input
+            id="candidate-name"
+            type="text"
+            placeholder="Enter your name"
+            class="w-full
+                   px-4 py-3
+                   rounded-xl
+                   border border-outline-variant/40
+                   outline-none
+                   focus:border-primary"
+          >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div>
+
+          <label
+            class="block text-xs
+                   font-semibold
+                   mb-1.5"
+          >
+            Email
+          </label>
+
+          <input
+            id="candidate-email"
+            type="email"
+            placeholder="Enter your email"
+            class="w-full
+                   px-4 py-3
+                   rounded-xl
+                   border border-outline-variant/40
+                   outline-none
+                   focus:border-primary"
+          >
+
+        </div>
+
+
+        <!-- ROLE -->
+
+        <div>
+
+          <label
+            class="block text-xs
+                   font-semibold
+                   mb-1.5"
+          >
+            Role
+          </label>
+
+          <input
+            id="candidate-role"
+            type="text"
+            placeholder="e.g. AI Engineer"
+            class="w-full
+                   px-4 py-3
+                   rounded-xl
+                   border border-outline-variant/40
+                   outline-none
+                   focus:border-primary"
+          >
+
+        </div>
+
+
+        <!-- DOMAIN -->
+
+        <div>
+
+          <label
+            class="block text-xs
+                   font-semibold
+                   mb-1.5"
+          >
+            Domain
+          </label>
+
+          <input
+            id="candidate-domain"
+            type="text"
+            placeholder="e.g. Artificial Intelligence"
+            class="w-full
+                   px-4 py-3
+                   rounded-xl
+                   border border-outline-variant/40
+                   outline-none
+                   focus:border-primary"
+          >
+
+        </div>
+
+
+        <!-- START -->
+
+        <button
+          onclick="startInterview()"
+          class="w-full
+                 mt-3
+                 py-3.5
+                 rounded-xl
+                 bg-primary
+                 text-white
+                 font-semibold
+                 hover:bg-primary-container
+                 transition"
+        >
+
+          Start Interview
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         INTERVIEW SCREEN
+    ======================================================= -->
+
+    <div
+      id="interview-screen"
+      class="hidden p-6"
+    >
+
+      <!-- PROGRESS -->
+
+      <div
+        class="flex items-center
+               justify-between
+               mb-5"
+      >
+
+        <div>
+
+          <span
+            id="interview-candidate-name"
+            class="font-semibold text-sm"
+          ></span>
+
+          <p
+            id="interview-role-text"
+            class="text-xs
+                   text-on-surface-variant
+                   mt-1"
+          ></p>
+
+        </div>
+
+
+        <span
+          id="question-counter"
+          class="text-xs
+                 font-semibold
+                 px-3 py-1.5
+                 rounded-full
+                 bg-surface-container"
+        >
+          Question 1/5
+        </span>
+
+      </div>
+
+
+      <!-- QUESTION -->
+
+      <div
+        class="rounded-2xl
+               bg-surface-container
+               p-5 mb-5"
+      >
+
+        <div
+          class="flex items-center gap-2
+                 text-primary
+                 text-xs
+                 font-semibold
+                 mb-3"
+        >
+
+          <span
+            class="material-symbols-outlined text-[18px]"
+          >
+            quiz
+          </span>
+
+          Interview Question
+
+        </div>
+
+
+        <div
+          id="current-question"
+          class="text-base
+                 font-semibold
+                 leading-relaxed"
+        >
+          Loading question...
+        </div>
+
+      </div>
+
+
+      <!-- ANSWER -->
+
+      <textarea
+        id="interview-answer"
+        rows="6"
+        placeholder="Type your answer here..."
+        class="w-full
+               px-4 py-3
+               rounded-xl
+               border border-outline-variant/40
+               outline-none
+               resize-none
+               focus:border-primary
+               text-sm"
+      ></textarea>
+
+
+      <!-- ACTION -->
+
+      <button
+        onclick="submitInterviewAnswer()"
+        id="submit-answer-btn"
+        class="w-full
+               mt-4
+               py-3.5
+               rounded-xl
+               bg-primary
+               text-white
+               font-semibold
+               hover:bg-primary-container
+               transition"
+      >
+
+        Submit Answer
+
+      </button>
+
+
+      <!-- EXIT -->
+
+      <button
+        onclick="closeInterview()"
+        class="w-full
+               mt-2
+               py-2.5
+               text-xs
+               text-on-surface-variant
+               hover:text-primary"
+      >
+
+        Exit Interview
+
+      </button>
+
+    </div>
+
+
+    <!-- ======================================================
+         RESULT
+    ======================================================= -->
+
+    <div
+      id="interview-result"
+      class="hidden p-6"
+    >
+
+      <div
+        class="text-center mb-6"
+      >
+
+        <div
+          id="result-icon"
+          class="mx-auto
+                 w-16 h-16
+                 rounded-full
+                 bg-primary/10
+                 flex items-center justify-center
+                 mb-4"
+        >
+
+          <span
+            class="material-symbols-outlined
+                   text-primary text-[34px]"
+          >
+            verified
+          </span>
+
+        </div>
+
+
+        <h2
+          id="result-status"
+          class="font-display
+                 font-bold
+                 text-2xl"
+        >
+          SELECTED
+        </h2>
+
+        <p
+          id="result-candidate"
+          class="text-sm
+                 text-on-surface-variant
+                 mt-1"
+        ></p>
+
+      </div>
+
+
+      <!-- SCORE -->
+
+      <div
+        class="grid grid-cols-2
+               md:grid-cols-4
+               gap-3 mb-5"
+      >
+
+        <div
+          class="rounded-xl
+                 bg-surface-container
+                 p-4 text-center"
+        >
+
+          <div
+            id="overall-score"
+            class="text-xl font-bold text-primary"
+          >
+            0/10
+          </div>
+
+          <div
+            class="text-[10px]
+                   text-on-surface-variant
+                   mt-1"
+          >
+            Overall
+          </div>
+
+        </div>
+
+
+        <div
+          class="rounded-xl
+                 bg-surface-container
+                 p-4 text-center"
+        >
+
+          <div
+            id="technical-score"
+            class="text-xl font-bold"
+          >
+            0/10
+          </div>
+
+          <div
+            class="text-[10px]
+                   text-on-surface-variant
+                   mt-1"
+          >
+            Technical
+          </div>
+
+        </div>
+
+
+        <div
+          class="rounded-xl
+                 bg-surface-container
+                 p-4 text-center"
+        >
+
+          <div
+            id="communication-score"
+            class="text-xl font-bold"
+          >
+            0/10
+          </div>
+
+          <div
+            class="text-[10px]
+                   text-on-surface-variant
+                   mt-1"
+          >
+            Communication
+          </div>
+
+        </div>
+
+
+        <div
+          class="rounded-xl
+                 bg-surface-container
+                 p-4 text-center"
+        >
+
+          <div
+            id="problem-score"
+            class="text-xl font-bold"
+          >
+            0/10
+          </div>
+
+          <div
+            class="text-[10px]
+                   text-on-surface-variant
+                   mt-1"
+          >
+            Problem Solving
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SKILLS -->
+
+      <div
+        class="rounded-2xl
+               bg-surface-container
+               p-5 mb-4"
+      >
+
+        <h3
+          class="font-semibold
+                 text-sm mb-3"
+        >
+          Skills Assessment
+        </h3>
+
+
+        <div
+          id="skills-list"
+          class="flex flex-wrap gap-2"
+        ></div>
+
+      </div>
+
+
+      <!-- SHORT FEEDBACK -->
+
+      <div
+        class="rounded-2xl
+               border border-outline-variant/30
+               p-5"
+      >
+
+        <h3
+          class="font-semibold
+                 text-sm mb-2"
+        >
+          Feedback
+        </h3>
+
+        <p
+          id="short-feedback"
+          class="text-sm
+                 text-on-surface-variant
+                 leading-relaxed"
+        ></p>
+
+      </div>
+
+
+      <!-- CLOSE -->
+
+      <button
+        onclick="closeInterview()"
+        class="w-full
+               mt-5
+               py-3
+               rounded-xl
+               bg-primary
+               text-white
+               font-semibold"
+      >
+
+        Done
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================= -->
+
+<script>
+
+
+/* =============================================================
+   API
+============================================================= */
+
+const API_ENDPOINT =
+  "https://inquisitors-ai-9d64f4c7.fastapicloud.dev/chat";
+
+
+const INTERVIEW_QUESTION_ENDPOINT =
+  "https://inquisitors-ai-9d64f4c7.fastapicloud.dev/interview/question";
+
+
+const INTERVIEW_EVALUATION_ENDPOINT =
+  "https://inquisitors-ai-9d64f4c7.fastapicloud.dev/interview/evaluate";
+
+
+const AVATAR_URL =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA";
+
+
+/* =============================================================
+   GENERAL HELPERS
+============================================================= */
+
+function formatTime(date) {
+
+  return date.toLocaleTimeString(
+    "en-US",
+    {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }
+  );
+
+}
+
+
+function escapeHtml(text) {
+
+  const div = document.createElement("div");
+
+  div.innerText = text;
+
+  return div.innerHTML;
+
+}
+
+
+function scrollToBottom() {
+
+  const container =
+    document.getElementById("chat-messages");
+
+  container.scrollTo({
+
+    top: container.scrollHeight,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* =============================================================
+   TOOLTIP
+============================================================= */
+
+function dismissTooltip(event) {
+
+  if (event) {
+
+    event.stopPropagation();
+
+  }
+
+  const tooltip =
+    document.getElementById("quisi-tooltip");
+
+  tooltip.classList.add("hidden");
+
+}
+
+
+/* =============================================================
+   CHAT OPEN / CLOSE
+============================================================= */
+
+function toggleChat() {
+
+  const popup =
+    document.getElementById("quisi-chat-popup");
+
+
+  if (popup.classList.contains("hidden")) {
+
+    popup.classList.remove("hidden");
+
+    popup.classList.add("flex");
+
+    popup.classList.add("chat-popup-animation");
+
+    setTimeout(() => {
+
+      document
+        .getElementById("popup-chat-input")
+        .focus();
+
       scrollToBottom();
+
+    }, 100);
+
+  }
+
+  else {
+
+    popup.classList.add("hidden");
+
+    popup.classList.remove("flex");
+
+  }
+
+}
+
+
+/* =============================================================
+   APPEND CHAT MESSAGE
+============================================================= */
+
+function appendMessage(text, sender) {
+
+  const chatMessages =
+    document.getElementById("chat-messages");
+
+  const time =
+    formatTime(new Date());
+
+  const safeText =
+    escapeHtml(text)
+      .replace(/\n/g, "<br>");
+
+
+  let messageHtml = "";
+
+
+  if (sender === "user") {
+
+    messageHtml = `
+
+      <div
+        class="flex flex-col gap-1.5
+               max-w-[88%]
+               self-end
+               animate-fade"
+      >
+
+        <div
+          class="flex items-end gap-2
+                 flex-row-reverse"
+        >
+
+          <div
+            class="w-7 h-7
+                   rounded-full
+                   bg-primary
+                   text-white
+                   flex items-center justify-center
+                   flex-shrink-0"
+          >
+
+            <span
+              class="material-symbols-outlined
+                     text-[16px]"
+            >
+              person
+            </span>
+
+          </div>
+
+
+          <div
+            class="bg-primary
+                   text-white
+                   px-4 py-3
+                   rounded-2xl
+                   rounded-br-sm
+                   text-sm
+                   leading-relaxed"
+          >
+
+            ${safeText}
+
+          </div>
+
+        </div>
+
+
+        <span
+          class="text-[10px]
+                 text-on-surface-variant/60
+                 self-end
+                 mr-9"
+        >
+
+          ${time}
+
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+
+  else {
+
+    messageHtml = `
+
+      <div
+        class="flex flex-col gap-1.5
+               max-w-[88%]
+               self-start
+               animate-fade"
+      >
+
+        <div
+          class="flex items-end gap-2.5"
+        >
+
+          <div
+            class="w-8 h-8
+                   rounded-full
+                   bg-surface-container
+                   border border-outline-variant/30
+                   flex items-center justify-center
+                   overflow-hidden
+                   flex-shrink-0"
+          >
+
+            <img
+              src="${AVATAR_URL}"
+              class="w-6 h-6 object-contain"
+              alt="Quisi"
+            >
+
+          </div>
+
+
+          <div
+            class="bg-surface-container
+                   px-4 py-3
+                   rounded-2xl
+                   rounded-bl-sm
+                   text-sm
+                   leading-relaxed"
+          >
+
+            ${safeText}
+
+          </div>
+
+        </div>
+
+
+        <span
+          class="text-[10px]
+                 text-on-surface-variant/60
+                 ml-10"
+        >
+
+          ${time}
+
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+
+  chatMessages.insertAdjacentHTML(
+    "beforeend",
+    messageHtml
+  );
+
+
+  scrollToBottom();
+
+}
+
+
+/* =============================================================
+   LOADING
+============================================================= */
+
+function showLoadingIndicator() {
+
+  const chatMessages =
+    document.getElementById("chat-messages");
+
+
+  const html = `
+
+    <div
+      id="loading-indicator"
+      class="flex items-center gap-3
+             max-w-[88%]
+             animate-fade"
+    >
+
+      <div
+        class="w-8 h-8
+               rounded-full
+               bg-surface-container
+               flex items-center justify-center"
+      >
+
+        <img
+          src="${AVATAR_URL}"
+          class="w-6 h-6 object-contain"
+          alt="Quisi"
+        >
+
+      </div>
+
+
+      <div
+        class="bg-surface-container
+               px-4 py-3
+               rounded-2xl
+               text-xs
+               text-on-surface-variant"
+      >
+
+        Quisi is thinking...
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  chatMessages.insertAdjacentHTML(
+    "beforeend",
+    html
+  );
+
+
+  scrollToBottom();
+
+}
+
+
+function removeLoadingIndicator() {
+
+  const indicator =
+    document.getElementById(
+      "loading-indicator"
+    );
+
+  if (indicator) {
+
+    indicator.remove();
+
+  }
+
+}
+
+
+/* =============================================================
+   FILE HANDLING
+============================================================= */
+
+let selectedFile = null;
+
+let extractedFileText = "";
+
+
+const fileInput =
+  document.getElementById("file-input");
+
+
+const attachFileBtn =
+  document.getElementById(
+    "attach-file-btn"
+  );
+
+
+const filePreview =
+  document.getElementById(
+    "file-preview"
+  );
+
+
+const fileNameElement =
+  document.getElementById(
+    "file-name"
+  );
+
+
+const fileStatus =
+  document.getElementById(
+    "file-status"
+  );
+
+
+attachFileBtn.addEventListener(
+  "click",
+  () => {
+
+    fileInput.click();
+
+  }
+);
+
+
+fileInput.addEventListener(
+  "change",
+  async function () {
+
+    const file =
+      this.files[0];
+
+
+    if (!file) {
+
+      return;
+
     }
 
-    function removeLoadingIndicator() {
-      const indicator = document.getElementById('loading-indicator');
-      if (indicator) indicator.remove();
+
+    selectedFile = file;
+
+    extractedFileText = "";
+
+
+    filePreview.classList.remove(
+      "hidden"
+    );
+
+
+    fileNameElement.textContent =
+      file.name;
+
+
+    fileStatus.textContent =
+      "Reading file...";
+
+
+    try {
+
+      extractedFileText =
+        await extractFileText(file);
+
+
+      if (
+        !extractedFileText ||
+        extractedFileText.trim() === ""
+      ) {
+
+        fileStatus.textContent =
+          "No readable text found.";
+
+        return;
+
+      }
+
+
+      fileStatus.textContent =
+        `File ready • ${
+          extractedFileText.length.toLocaleString()
+        } characters`;
+
     }
 
-    async function sendUserMessage(text) {
-      if (!text || text.trim() === '') return;
+    catch (error) {
 
-      appendMessage(text, 'user');
-      showLoadingIndicator();
+      console.error(
+        "File reading error:",
+        error
+      );
 
-      console.log(`[Quisi API Request] POST ${API_ENDPOINT}`, { message: text });
 
-      try {
-        const response = await fetch(API_ENDPOINT, {
-          method: 'POST',
+      fileStatus.textContent =
+        "Unable to read this file.";
+
+      extractedFileText = "";
+
+    }
+
+  }
+);
+
+
+/* =============================================================
+   EXTRACT FILE TEXT
+============================================================= */
+
+async function extractFileText(file) {
+
+  const fileName =
+    file.name.toLowerCase();
+
+
+  /* TXT CSV JSON MD */
+
+  if (
+
+    fileName.endsWith(".txt") ||
+    fileName.endsWith(".csv") ||
+    fileName.endsWith(".json") ||
+    fileName.endsWith(".md")
+
+  ) {
+
+    return await file.text();
+
+  }
+
+
+  /* DOCX */
+
+  if (
+    fileName.endsWith(".docx")
+  ) {
+
+    if (
+      typeof mammoth === "undefined"
+    ) {
+
+      throw new Error(
+        "DOCX reader unavailable."
+      );
+
+    }
+
+
+    const arrayBuffer =
+      await file.arrayBuffer();
+
+
+    const result =
+      await mammoth.extractRawText({
+
+        arrayBuffer:
+
+          arrayBuffer
+
+      });
+
+
+    return result.value;
+
+  }
+
+
+  /* PDF */
+
+  if (
+    fileName.endsWith(".pdf")
+  ) {
+
+    const pdfjsLib =
+      await import(
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs"
+      );
+
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+
+
+    const arrayBuffer =
+      await file.arrayBuffer();
+
+
+    const pdf =
+      await pdfjsLib.getDocument({
+
+        data: arrayBuffer
+
+      }).promise;
+
+
+    let fullText = "";
+
+
+    for (
+      let pageNumber = 1;
+      pageNumber <= pdf.numPages;
+      pageNumber++
+    ) {
+
+      const page =
+        await pdf.getPage(
+          pageNumber
+        );
+
+
+      const textContent =
+        await page.getTextContent();
+
+
+      const pageText =
+        textContent.items
+          .map(
+            item => item.str
+          )
+          .join(" ");
+
+
+      fullText +=
+        `\n\n--- Page ${pageNumber} ---\n\n`;
+
+
+      fullText += pageText;
+
+    }
+
+
+    return fullText;
+
+  }
+
+
+  throw new Error(
+    "Unsupported file type."
+  );
+
+}
+
+
+/* =============================================================
+   REMOVE FILE
+============================================================= */
+
+function removeSelectedFile() {
+
+  selectedFile = null;
+
+  extractedFileText = "";
+
+  fileInput.value = "";
+
+  filePreview.classList.add(
+    "hidden"
+  );
+
+  fileNameElement.textContent = "";
+
+  fileStatus.textContent = "";
+
+}
+
+
+/* =============================================================
+   SEND CHAT MESSAGE
+============================================================= */
+
+async function sendUserMessage(text) {
+
+  if (
+    !text ||
+    text.trim() === ""
+  ) {
+
+    return;
+
+  }
+
+
+  let finalMessage =
+    text.trim();
+
+
+  /* ==========================================================
+     ADD FILE CONTENT
+  ========================================================== */
+
+  if (
+    selectedFile &&
+    extractedFileText
+  ) {
+
+    finalMessage = `
+
+The user has uploaded a file.
+
+File Name:
+${selectedFile.name}
+
+File Content:
+${extractedFileText}
+
+User Question:
+${text}
+
+IMPORTANT:
+Answer the user's question using the uploaded file content
+whenever relevant.
+
+If the requested information is not present in the file,
+say that it was not found in the uploaded file.
+
+Keep the answer concise and clear.
+
+`;
+
+  }
+
+
+  /* SHOW USER MESSAGE */
+
+  appendMessage(
+    text,
+    "user"
+  );
+
+
+  /* FILE ATTACHMENT */
+
+  if (selectedFile) {
+
+    appendMessage(
+      `📎 ${selectedFile.name} attached`,
+      "user"
+    );
+
+  }
+
+
+  showLoadingIndicator();
+
+
+  try {
+
+    const response =
+      await fetch(
+        API_ENDPOINT,
+        {
+
+          method: "POST",
+
           headers: {
-            'Content-Type': 'application/json'
+
+            "Content-Type":
+              "application/json"
+
           },
-          body: JSON.stringify({ message: text })
-        });
 
-        console.log(`[Quisi API Response Status]`, response.status, response.statusText);
+          body: JSON.stringify({
 
-        removeLoadingIndicator();
+            message:
+              finalMessage
 
-        if (!response.ok) {
-          console.error(`[Quisi API HTTP Error] ${response.status} ${response.statusText}`);
-          throw new Error(`Server returned HTTP ${response.status}`);
+          })
+
         }
+      );
 
-        const data = await response.json();
-        console.log(`[Quisi API Response Data]`, data);
 
-        if (data && data.response) {
-          appendMessage(data.response, 'ai');
-        } else {
-          console.warn("[Quisi API Warning] Missing 'response' key in JSON payload:", data);
-          appendMessage("Sorry, I couldn't connect to Quisi right now. Please try again.", 'ai');
-        }
-      } catch (error) {
-        console.error("[Quisi API Exception Catch]", error);
-        removeLoadingIndicator();
-        appendMessage("Sorry, I couldn't connect to Quisi right now. Please try again.", 'ai');
-      }
+    removeLoadingIndicator();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
     }
 
-    document.getElementById('popup-chat-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const input = document.getElementById('popup-chat-input');
-      const text = input.value.trim();
-      if (!text) return;
 
-      input.value = '';
-      input.style.height = '38px';
-      sendUserMessage(text);
-    });
+    const data =
+      await response.json();
 
-    document.getElementById('popup-chat-input').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        document.getElementById('popup-chat-form').dispatchEvent(new Event('submit'));
+
+    if (
+      data &&
+      data.response
+    ) {
+
+      appendMessage(
+        data.response,
+        "ai"
+      );
+
+    }
+
+    else {
+
+      appendMessage(
+        "I couldn't understand the server response.",
+        "ai"
+      );
+
+    }
+
+
+    /* CLEAR FILE */
+
+    removeSelectedFile();
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "Chat error:",
+      error
+    );
+
+
+    removeLoadingIndicator();
+
+
+    appendMessage(
+      "Sorry, I couldn't connect to Quisi right now.",
+      "ai"
+    );
+
+  }
+
+}
+
+
+/* =============================================================
+   CHAT FORM
+============================================================= */
+
+document
+  .getElementById(
+    "popup-chat-form"
+  )
+  .addEventListener(
+    "submit",
+    function (event) {
+
+      event.preventDefault();
+
+
+      const input =
+        document.getElementById(
+          "popup-chat-input"
+        );
+
+
+      const text =
+        input.value.trim();
+
+
+      if (!text) {
+
+        return;
+
       }
+
+
+      input.value = "";
+
+      input.style.height =
+        "38px";
+
+
+      sendUserMessage(
+        text
+      );
+
+    }
+  );
+
+
+/* ENTER SEND */
+
+document
+  .getElementById(
+    "popup-chat-input"
+  )
+  .addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Enter" &&
+        !event.shiftKey
+      ) {
+
+        event.preventDefault();
+
+
+        document
+          .getElementById(
+            "popup-chat-form"
+          )
+          .dispatchEvent(
+            new Event("submit")
+          );
+
+      }
+
+    }
+  );
+
+
+/* AUTO RESIZE */
+
+document
+  .getElementById(
+    "popup-chat-input"
+  )
+  .addEventListener(
+    "input",
+    function () {
+
+      this.style.height =
+        "";
+
+
+      this.style.height =
+        Math.min(
+          this.scrollHeight,
+          96
+        ) + "px";
+
+    }
+  );
+
+
+/* =============================================================
+   VOICE INPUT
+============================================================= */
+
+let recognition = null;
+
+let isRecording = false;
+
+
+const voiceBtn =
+  document.getElementById(
+    "voice-btn"
+  );
+
+
+const voiceIcon =
+  document.getElementById(
+    "voice-icon"
+  );
+
+
+if (
+  "webkitSpeechRecognition"
+  in window ||
+  "SpeechRecognition"
+  in window
+) {
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+  recognition =
+    new SpeechRecognition();
+
+
+  recognition.continuous =
+    false;
+
+
+  recognition.interimResults =
+    false;
+
+
+  recognition.lang =
+    "en-US";
+
+
+  recognition.onstart =
+    function () {
+
+      isRecording = true;
+
+      voiceBtn.classList.add(
+        "recording"
+      );
+
+
+      voiceIcon.textContent =
+        "mic_off";
+
+    };
+
+
+  recognition.onresult =
+    function (event) {
+
+      const transcript =
+        event.results[0][0].transcript;
+
+
+      const input =
+        document.getElementById(
+          "popup-chat-input"
+        );
+
+
+      input.value +=
+        transcript;
+
+
+      input.dispatchEvent(
+        new Event("input")
+      );
+
+    };
+
+
+  recognition.onerror =
+    function (event) {
+
+      console.error(
+        "Voice error:",
+        event.error
+      );
+
+    };
+
+
+  recognition.onend =
+    function () {
+
+      isRecording = false;
+
+      voiceBtn.classList.remove(
+        "recording"
+      );
+
+
+      voiceIcon.textContent =
+        "mic";
+
+    };
+
+
+  voiceBtn.addEventListener(
+    "click",
+    function () {
+
+      if (isRecording) {
+
+        recognition.stop();
+
+      }
+
+      else {
+
+        recognition.start();
+
+      }
+
+    }
+  );
+
+}
+
+else {
+
+  voiceBtn.addEventListener(
+    "click",
+    function () {
+
+      alert(
+        "Voice input is not supported in this browser. Please use Google Chrome or Microsoft Edge."
+      );
+
+    }
+  );
+
+}
+
+
+/* =============================================================
+   WELCOME TIME
+============================================================= */
+
+document
+  .getElementById(
+    "welcome-time"
+  )
+  .textContent =
+  formatTime(new Date());
+
+
+/* =============================================================
+   INTERVIEW VARIABLES
+============================================================= */
+
+let interviewData = {
+
+  name: "",
+  email: "",
+  role: "",
+  domain: "",
+
+  questionNumber: 0,
+
+  questionsAnswers: [],
+
+  currentQuestion: ""
+
+};
+
+
+/* =============================================================
+   OPEN INTERVIEW
+============================================================= */
+
+function openInterview() {
+
+  const modal =
+    document.getElementById(
+      "interview-modal"
+    );
+
+
+  modal.classList.remove(
+    "hidden"
+  );
+
+
+  modal.classList.add(
+    "flex"
+  );
+
+
+  showEnrollment();
+
+}
+
+
+/* =============================================================
+   CLOSE INTERVIEW
+============================================================= */
+
+function closeInterview() {
+
+  const modal =
+    document.getElementById(
+      "interview-modal"
+    );
+
+
+  modal.classList.add(
+    "hidden"
+  );
+
+
+  modal.classList.remove(
+    "flex"
+  );
+
+}
+
+
+/* =============================================================
+   SHOW ENROLLMENT
+============================================================= */
+
+function showEnrollment() {
+
+  document
+    .getElementById(
+      "interview-enrollment"
+    )
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById(
+      "interview-screen"
+    )
+    .classList.add("hidden");
+
+
+  document
+    .getElementById(
+      "interview-result"
+    )
+    .classList.add("hidden");
+
+}
+
+
+/* =============================================================
+   START INTERVIEW
+============================================================= */
+
+async function startInterview() {
+
+  const name =
+    document
+      .getElementById(
+        "candidate-name"
+      )
+      .value
+      .trim();
+
+
+  const email =
+    document
+      .getElementById(
+        "candidate-email"
+      )
+      .value
+      .trim();
+
+
+  const role =
+    document
+      .getElementById(
+        "candidate-role"
+      )
+      .value
+      .trim();
+
+
+  const domain =
+    document
+      .getElementById(
+        "candidate-domain"
+      )
+      .value
+      .trim();
+
+
+  if (
+    !name ||
+    !email ||
+    !role ||
+    !domain
+  ) {
+
+    alert(
+      "Please fill all fields."
+    );
+
+    return;
+
+  }
+
+
+  interviewData = {
+
+    name,
+    email,
+    role,
+    domain,
+
+    questionNumber: 0,
+
+    questionsAnswers: [],
+
+    currentQuestion: ""
+
+  };
+
+
+  document
+    .getElementById(
+      "interview-enrollment"
+    )
+    .classList.add("hidden");
+
+
+  document
+    .getElementById(
+      "interview-screen"
+    )
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById(
+      "interview-candidate-name"
+    )
+    .textContent =
+    name;
+
+
+  document
+    .getElementById(
+      "interview-role-text"
+    )
+    .textContent =
+    `${role} • ${domain}`;
+
+
+  await getInterviewQuestion();
+
+}
+
+
+/* =============================================================
+   GET INTERVIEW QUESTION
+============================================================= */
+
+async function getInterviewQuestion() {
+
+  const questionBox =
+    document.getElementById(
+      "current-question"
+    );
+
+
+  const counter =
+    document.getElementById(
+      "question-counter"
+    );
+
+
+  questionBox.textContent =
+    "Generating question...";
+
+
+  counter.textContent =
+    `Question ${
+      interviewData.questionNumber + 1
+    }/5`;
+
+
+  try {
+
+    const response =
+      await fetch(
+        INTERVIEW_QUESTION_ENDPOINT,
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body: JSON.stringify({
+
+            role:
+              interviewData.role,
+
+            domain:
+              interviewData.domain
+
+          })
+
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    interviewData.currentQuestion =
+      data.question ||
+      data.response ||
+      data.message ||
+      "";
+
+
+    questionBox.textContent =
+      interviewData.currentQuestion;
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "Interview question error:",
+      error
+    );
+
+
+    questionBox.textContent =
+      "Unable to generate interview question. Please check your backend endpoint.";
+
+  }
+
+}
+
+
+/* =============================================================
+   SUBMIT INTERVIEW ANSWER
+============================================================= */
+
+async function submitInterviewAnswer() {
+
+  const answerBox =
+    document.getElementById(
+      "interview-answer"
+    );
+
+
+  const answer =
+    answerBox.value.trim();
+
+
+  if (!answer) {
+
+    alert(
+      "Please enter your answer."
+    );
+
+    return;
+
+  }
+
+
+  interviewData.questionsAnswers.push({
+
+    question:
+      interviewData.currentQuestion,
+
+    answer:
+      answer
+
+  });
+
+
+  answerBox.value = "";
+
+
+  interviewData.questionNumber++;
+
+
+  if (
+    interviewData.questionNumber >= 5
+  ) {
+
+    await finishInterview();
+
+    return;
+
+  }
+
+
+  await getInterviewQuestion();
+
+}
+
+
+/* =============================================================
+   FINISH INTERVIEW
+============================================================= */
+
+async function finishInterview() {
+
+  document
+    .getElementById(
+      "interview-screen"
+    )
+    .classList.add("hidden");
+
+
+  document
+    .getElementById(
+      "interview-result"
+    )
+    .classList.remove("hidden");
+
+
+  try {
+
+    const response =
+      await fetch(
+        INTERVIEW_EVALUATION_ENDPOINT,
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body: JSON.stringify({
+
+            role:
+              interviewData.role,
+
+            domain:
+              interviewData.domain,
+
+            questions_answers:
+              interviewData.questionsAnswers
+
+          })
+
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    displayInterviewResult(
+      data
+    );
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "Interview evaluation error:",
+      error
+    );
+
+
+    /*
+       FALLBACK RESULT
+    */
+
+    displayInterviewResult({
+
+      overall_score: 0,
+
+      technical_score: 0,
+
+      communication_score: 0,
+
+      problem_solving_score: 0,
+
+      strengths: [],
+
+      areas_for_improvement: [],
+
+      final_feedback:
+        "Interview evaluation could not be retrieved."
+
     });
-  </script>
+
+  }
+
+}
+
+
+/* =============================================================
+   DISPLAY RESULT
+============================================================= */
+
+function displayInterviewResult(data) {
+
+  let overall =
+    Number(
+      data.overall_score ??
+      data.overall ??
+      0
+    );
+
+
+  let technical =
+    Number(
+      data.technical_score ??
+      data.technical ??
+      0
+    );
+
+
+  let communication =
+    Number(
+      data.communication_score ??
+      data.communication ??
+      0
+    );
+
+
+  let problemSolving =
+    Number(
+      data.problem_solving_score ??
+      data.problem_solving ??
+      0
+    );
+
+
+  /*
+     IMPORTANT:
+     6/10 OR ABOVE = SELECTED
+  */
+
+  const selected =
+    overall >= 6;
+
+
+  document
+    .getElementById(
+      "result-status"
+    )
+    .textContent =
+    selected
+      ? "SELECTED"
+      : "NOT SELECTED";
+
+
+  document
+    .getElementById(
+      "result-candidate"
+    )
+    .textContent =
+    `${interviewData.name} • ${interviewData.role}`;
+
+
+  document
+    .getElementById(
+      "overall-score"
+    )
+    .textContent =
+    `${overall}/10`;
+
+
+  document
+    .getElementById(
+      "technical-score"
+    )
+    .textContent =
+    `${technical}/10`;
+
+
+  document
+    .getElementById(
+      "communication-score"
+    )
+    .textContent =
+    `${communication}/10`;
+
+
+  document
+    .getElementById(
+      "problem-score"
+    )
+    .textContent =
+    `${problemSolving}/10`;
+
+
+  /* STATUS ICON */
+
+  const icon =
+    document.getElementById(
+      "result-icon"
+    );
+
+
+  if (selected) {
+
+    icon.innerHTML = `
+
+      <span
+        class="material-symbols-outlined
+               text-primary text-[34px]"
+      >
+        check_circle
+      </span>
+
+    `;
+
+  }
+
+  else {
+
+    icon.innerHTML = `
+
+      <span
+        class="material-symbols-outlined
+               text-secondary text-[34px]"
+      >
+        cancel
+      </span>
+
+    `;
+
+  }
+
+
+  /* SKILLS */
+
+  const skillsList =
+    document.getElementById(
+      "skills-list"
+    );
+
+
+  skillsList.innerHTML = "";
+
+
+  const skills = [
+
+    `Technical: ${technical}/10`,
+
+    `Communication: ${communication}/10`,
+
+    `Problem Solving: ${problemSolving}/10`
+
+  ];
+
+
+  skills.forEach(
+    skill => {
+
+      const span =
+        document.createElement(
+          "span"
+        );
+
+
+      span.className =
+        "px-3 py-1.5 rounded-full bg-white border border-outline-variant/30 text-xs font-medium";
+
+
+      span.textContent =
+        skill;
+
+
+      skillsList.appendChild(
+        span
+      );
+
+    }
+  );
+
+
+  /* FEEDBACK */
+
+  let feedback =
+    data.final_feedback ||
+    data.feedback ||
+    "";
+
+
+  if (
+    Array.isArray(
+      data.strengths
+    ) &&
+    data.strengths.length
+  ) {
+
+    feedback =
+      data.strengths
+        .slice(0, 2)
+        .join(" • ");
+
+  }
+
+
+  if (!feedback) {
+
+    feedback =
+      selected
+        ? "Good performance. You meet the selection threshold."
+        : "Your score is below the selection threshold. Keep practicing.";
+
+  }
+
+
+  document
+    .getElementById(
+      "short-feedback"
+    )
+    .textContent =
+    feedback;
+
+}
+
+
+/* =============================================================
+   CLOSE MODAL WHEN CLICK OUTSIDE
+============================================================= */
+
+document
+  .getElementById(
+    "interview-modal"
+  )
+  .addEventListener(
+    "click",
+    function (event) {
+
+      if (
+        event.target === this
+      ) {
+
+        closeInterview();
+
+      }
+
+    }
+  );
+
+
+</script>
+
+
 </body>
 </html>
