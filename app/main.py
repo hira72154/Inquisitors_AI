@@ -24,8 +24,14 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        # Local development
         "http://127.0.0.1:3000",
         "http://localhost:3000",
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+
+        # GitHub Pages
+        "https://hira72154.github.io",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -128,6 +134,31 @@ def interview_evaluate(request: InterviewEvaluationRequest):
         questions_answers=request.questions_answers
     )
 
+    # --------------------------------------------------------
+    # If evaluate_interview() returns a dictionary,
+    # return its fields directly so the frontend can read:
+    #
+    # data.overall_score
+    # data.technical_score
+    # data.communication_score
+    # data.problem_solving_score
+    # data.final_feedback
+    # --------------------------------------------------------
+
+    if isinstance(evaluation, dict):
+
+        return evaluation
+
+    # --------------------------------------------------------
+    # Fallback if evaluation is returned as plain text
+    # --------------------------------------------------------
+
     return {
-        "evaluation": evaluation
+        "overall_score": 0,
+        "technical_score": 0,
+        "communication_score": 0,
+        "problem_solving_score": 0,
+        "strengths": [],
+        "areas_for_improvement": [],
+        "final_feedback": str(evaluation)
     }
