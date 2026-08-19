@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Inquisitors Society</title>
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#006578",
+            "primary-container": "#008097",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#f9fdff",
+            "secondary": "#7c5800",
+            "secondary-container": "#feb700",
+            "on-secondary-container": "#6b4b00",
+            "surface": "#ffffff",
+            "surface-container": "#f8f9ff",
+            "surface-container-low": "#eff4ff",
+            "surface-container-high": "#e5eeff",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#0b1c30",
+            "on-surface-variant": "#40484c",
+            "outline": "#6d797d",
+            "outline-variant": "#bdc8cd"
+          },
+          fontFamily: {
+            "display": ["Hanken Grotesk", "sans-serif"],
+            "body": ["Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-full flex flex-col relative selection:bg-primary/10">
+
+  <!-- MINIMAL MAIN NAVIGATION -->
+  <header class="w-full h-20 px-8 md:px-16 flex items-center justify-between border-b border-outline-variant/20 bg-surface/90 backdrop-blur-md sticky top-0 z-30">
+    <div class="flex items-center gap-4">
+      <img alt="Inquisitors Society Logo" class="h-10 w-auto object-contain" src="assests/inquisitors_logo.png"/>
+      <span class="font-display font-bold text-xl tracking-tight text-on-surface">Inquisitors Society</span>
+    </div>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-on-surface-variant">
+      <a href="#" class="hover:text-primary transition-colors">Research</a>
+      <a href="#" class="hover:text-primary transition-colors">Publications</a>
+      <a href="#" class="hover:text-primary transition-colors">About Us</a>
+      <a href="#" class="hover:text-primary transition-colors">Contact</a>
+    </nav>
+  </header>
+
+  <!-- CLEAN MINIMAL MAIN CONTENT (Lots of whitespace) -->
+  <main class="flex-1 flex flex-col items-center justify-center text-center px-6 py-20 max-w-4xl mx-auto">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container border border-outline-variant/30 text-xs font-semibold text-primary mb-6 shadow-sm">
+      <span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+      Intellectual Curiosity &amp; Advanced Research
+    </div>
+    
+    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-on-surface leading-[1.15] mb-6">
+      Exploring boundaries,<br/>uncovering knowledge.
+    </h1>
+    
+    <p class="text-body text-lg text-on-surface-variant max-w-2xl leading-relaxed mb-10">
+      Welcome to the official portal of Inquisitors Society. Our platform brings together researchers, scholars, and innovators dedicated to rigorous inquiry.
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <button onclick="toggleChat()" class="px-6 py-3.5 rounded-xl bg-primary text-on-primary font-semibold text-sm shadow-md hover:bg-primary-container transition-all flex items-center gap-2">
+        <span class="material-symbols-outlined text-[20px]">chat</span>
+        Talk to Quisi AI
+      </button>
+      <a href="#" class="px-6 py-3.5 rounded-xl bg-surface-container text-on-surface font-semibold text-sm border border-outline-variant/30 hover:bg-surface-container-high transition-all">
+        Learn More
+      </a>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-8 px-8 border-t border-outline-variant/20 text-center text-xs text-on-surface-variant/60">
+    &copy; 2026 Inquisitors Society. All rights reserved.
+  </footer>
+
+  <!-- FLOATING QUISI ROBOT BUTTON & TOOLTIP (BOTTOM-RIGHT) -->
+  <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+    <!-- SUBTLE TOOLTIP / BUBBLE -->
+    <div id="quisi-tooltip" class="bg-surface-container-lowest text-on-surface border border-outline-variant/30 shadow-lg px-3.5 py-2 rounded-2xl text-xs font-medium flex items-center gap-2 animate-[fade-in-up_0.5s_ease-out] transition-all">
+      <span>Hi, I'm Quisi 👋</span>
+      <button onclick="dismissTooltip(event)" class="text-on-surface-variant hover:text-on-surface text-xs font-bold leading-none p-0.5">✕</button>
+    </div>
+
+    <!-- FLOATING ROBOT BUTTON -->
+    <button id="quisi-robot-btn" onclick="toggleChat()" title="Chat with Quisi AI" class="relative group w-16 h-16 bg-transparent border-none outline-none flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer p-0">
+      <img alt="Quisi Robot" class="w-16 h-16 object-contain relative z-10 filter drop-shadow-md animate-[float_4s_ease-in-out_infinite]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA" style="animation: float 4s ease-in-out infinite;"/>
+      <!-- ONLINE BADGE -->
+      <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-secondary-container rounded-full border-2 border-surface z-20"></span>
+    </button>
+  </div>
+
+  <!-- FLOATING CHATBOT POPUP PANEL (BOTTOM-RIGHT) -->
+  <div id="quisi-chat-popup" class="fixed bottom-24 right-4 sm:right-6 w-[calc(100vw-32px)] sm:w-[400px] h-[580px] max-h-[calc(100vh-120px)] bg-surface-container-lowest border border-outline-variant/30 rounded-3xl shadow-[0_16px_48px_rgba(0,0,0,0.15)] z-50 flex flex-col overflow-hidden hidden transition-all duration-300 transform scale-95 opacity-0">
+    
+    <!-- CHAT POPUP HEADER -->
+    <div class="px-5 py-4 bg-surface-container border-b border-outline-variant/20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="relative w-10 h-10 rounded-full bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center overflow-hidden shadow-sm flex-shrink-0">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA" alt="Quisi Avatar" class="w-8 h-8 object-contain">
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2">
+            <span class="font-display font-bold text-base text-on-surface leading-none">Quisi</span>
+            <span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+            <span class="text-[10px] uppercase tracking-wider font-semibold text-secondary">Online</span>
+          </div>
+          <span class="text-xs text-on-surface-variant leading-tight mt-0.5">Inquisitors Society AI Companion</span>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-1">
+        <img alt="Inquisitors Logo" class="h-6 w-auto object-contain mr-1 opacity-70" src="assests/inquisitors_logo.png"/>
+        <button onclick="toggleChat()" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Close">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- CHAT MESSAGES CONTAINER -->
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 flex flex-col gap-4 custom-scrollbar bg-surface/50">
+      <!-- Initial Welcome Message -->
+      <div class="flex flex-col gap-1.5 max-w-[88%] self-start">
+        <div class="flex items-end gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant/30 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-xs">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA" alt="Quisi Avatar" class="w-6.5 h-6.5 object-contain">
+          </div>
+          <div class="bg-surface-container-lowest text-on-surface px-4 py-3 rounded-2xl rounded-bl-xs shadow-xs border border-outline-variant/20 text-sm leading-relaxed">
+            Hi, I'm Quisi! 👋<br/>How can I help you?
+          </div>
+        </div>
+        <span class="text-[10px] text-on-surface-variant/70 font-medium ml-10" id="welcome-time"></span>
+      </div>
+    </div>
+
+    <!-- CHAT INPUT AREA -->
+    <div class="p-3 bg-surface-container-lowest border-t border-outline-variant/20">
+      <form id="popup-chat-form" class="relative bg-surface-container rounded-2xl p-1.5 flex items-end gap-1.5 border border-outline-variant/30 focus-within:border-primary/50 transition-colors">
+        <button type="button" class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container-high flex-shrink-0 mb-0.5" title="Attach file">
+          <span class="material-symbols-outlined text-[20px]">attach_file</span>
+        </button>
+
+        <textarea id="popup-chat-input" rows="1" placeholder="Ask Quisi anything..." class="w-full bg-transparent border-none focus:ring-0 resize-none py-2 px-1 text-sm text-on-surface placeholder:text-on-surface-variant/50 max-h-24 custom-scrollbar min-h-[38px]" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
+
+        <div class="flex items-center gap-1 mb-0.5 flex-shrink-0">
+          <button type="button" class="w-9 h-9 flex items-center justify-center text-secondary-container bg-secondary-container/10 hover:bg-secondary-container hover:text-on-secondary-container rounded-full transition-colors" title="Voice Input">
+            <span class="material-symbols-outlined text-[18px]">mic</span>
+          </button>
+          <button type="submit" id="popup-send-btn" class="w-9 h-9 flex items-center justify-center bg-primary text-on-primary rounded-full hover:bg-primary-container transition-all shadow-xs" title="Send">
+            <span class="material-symbols-outlined text-[18px]">send</span>
+          </button>
+        </div>
+      </form>
+      <div class="text-center mt-2">
+        <span class="text-[9px] text-on-surface-variant/50 font-medium uppercase tracking-wider">Quisi — Inquisitors Society AI Companion</span>
+      </div>
+    </div>
+
+  </div>
+
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: rgba(189, 200, 205, 0.4);
+      border-radius: 10px;
+    }
+    .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+      background-color: rgba(189, 200, 205, 0.8);
+    }
+  </style>
+
+  <script>
+    const API_ENDPOINT = "http://127.0.0.1:8000/chat";
+    const AVATAR_URL = "https://lh3.googleusercontent.com/aida-public/AB6AXuCNiyl3fwPXi3ExSg4cb4Re8Estb6psJpGM3gUnu71ESpSCBaOwT-XcK2nMCAFkfoVfGf0wRvtFXrG4Ud-GgEMitYV063YRSkUvW-frZNxYjm-sVoplwvKRbK8xTjQL6uSgSfjZFsQ8Mwr-TJpNjUV0_msgEuINvpCpc-GNWBGTY30gRlInuIjvFMLsrt58PTjU_6tymlpzAfLrzI743fLiA2C-qgGmiWaJ030SmbyPQEF01vvmH4QA";
+
+    // Set welcome time stamp
+    document.getElementById('welcome-time').innerText = formatTime(new Date());
+
+    function formatTime(date) {
+      return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.innerText = text;
+      return div.innerHTML;
+    }
+
+    function scrollToBottom() {
+      const container = document.getElementById('chat-messages');
+      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+    }
+
+    function dismissTooltip(e) {
+      if (e) e.stopPropagation();
+      const tooltip = document.getElementById('quisi-tooltip');
+      if (tooltip) tooltip.classList.add('hidden');
+    }
+
+    function toggleChat() {
+      const popup = document.getElementById('quisi-chat-popup');
+      if (popup.classList.contains('hidden')) {
+        // Open Popup
+        popup.classList.remove('hidden');
+        setTimeout(() => {
+          popup.classList.remove('scale-95', 'opacity-0');
+          popup.classList.add('scale-100', 'opacity-100');
+        }, 10);
+        document.getElementById('popup-chat-input').focus();
+        scrollToBottom();
+      } else {
+        // Close Popup
+        popup.classList.remove('scale-100', 'opacity-100');
+        popup.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          popup.classList.add('hidden');
+        }, 300);
+      }
+    }
+
+    function appendMessage(text, sender) {
+      const chatMessages = document.getElementById('chat-messages');
+      const time = formatTime(new Date());
+      const safeText = escapeHtml(text).replace(/\n/g, '<br>');
+      let messageHtml = '';
+
+      if (sender === 'user') {
+        messageHtml = `
+          <div class="flex flex-col gap-1.5 max-w-[88%] self-end animate-[fade-in-up_0.25s_ease-out]">
+            <div class="flex items-end gap-2 flex-row-reverse">
+              <div class="w-7 h-7 rounded-full bg-primary flex-shrink-0 flex items-center justify-center shadow-xs">
+                <span class="material-symbols-outlined text-on-primary text-[16px]">person</span>
+              </div>
+              <div class="bg-primary text-on-primary px-4 py-3 rounded-2xl rounded-br-xs shadow-xs text-sm leading-relaxed">
+                ${safeText}
+              </div>
+            </div>
+            <span class="text-[10px] text-on-surface-variant/70 font-medium mr-9 self-end">${time}</span>
+          </div>
+        `;
+      } else {
+        messageHtml = `
+          <div class="flex flex-col gap-1.5 max-w-[88%] self-start animate-[fade-in-up_0.25s_ease-out]">
+            <div class="flex items-end gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant/30 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-xs">
+                <img src="${AVATAR_URL}" alt="Quisi Avatar" class="w-6.5 h-6.5 object-contain">
+              </div>
+              <div class="bg-surface-container-lowest text-on-surface px-4 py-3 rounded-2xl rounded-bl-xs shadow-xs border border-outline-variant/20 text-sm leading-relaxed">
+                ${safeText}
+              </div>
+            </div>
+            <span class="text-[10px] text-on-surface-variant/70 font-medium ml-10">${time}</span>
+          </div>
+        `;
+      }
+
+      chatMessages.insertAdjacentHTML('beforeend', messageHtml);
+      scrollToBottom();
+    }
+
+    function showLoadingIndicator() {
+      const chatMessages = document.getElementById('chat-messages');
+      const loadingHtml = `
+        <div id="loading-indicator" class="flex flex-col gap-1.5 max-w-[88%] self-start animate-[fade-in-up_0.25s_ease-out]">
+          <div class="flex items-end gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-surface-container border border-outline-variant/30 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-xs">
+              <img src="${AVATAR_URL}" alt="Quisi Avatar" class="w-6.5 h-6.5 object-contain">
+            </div>
+            <div class="bg-surface-container-lowest text-on-surface-variant px-4 py-3 rounded-2xl rounded-bl-xs shadow-xs border border-outline-variant/20 text-sm flex items-center gap-2.5">
+              <span class="inline-flex gap-1 items-center">
+                <span class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                <span class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                <span class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+              </span>
+              <span class="text-xs font-medium text-on-surface-variant">Quisi is thinking...</span>
+            </div>
+          </div>
+        </div>
+      `;
+      chatMessages.insertAdjacentHTML('beforeend', loadingHtml);
+      scrollToBottom();
+    }
+
+    function removeLoadingIndicator() {
+      const indicator = document.getElementById('loading-indicator');
+      if (indicator) indicator.remove();
+    }
+
+    async function sendUserMessage(text) {
+      if (!text || text.trim() === '') return;
+
+      appendMessage(text, 'user');
+      showLoadingIndicator();
+
+      console.log(`[Quisi API Request] POST ${API_ENDPOINT}`, { message: text });
+
+      try {
+        const response = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: text })
+        });
+
+        console.log(`[Quisi API Response Status]`, response.status, response.statusText);
+
+        removeLoadingIndicator();
+
+        if (!response.ok) {
+          console.error(`[Quisi API HTTP Error] ${response.status} ${response.statusText}`);
+          throw new Error(`Server returned HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(`[Quisi API Response Data]`, data);
+
+        if (data && data.response) {
+          appendMessage(data.response, 'ai');
+        } else {
+          console.warn("[Quisi API Warning] Missing 'response' key in JSON payload:", data);
+          appendMessage("Sorry, I couldn't connect to Quisi right now. Please try again.", 'ai');
+        }
+      } catch (error) {
+        console.error("[Quisi API Exception Catch]", error);
+        removeLoadingIndicator();
+        appendMessage("Sorry, I couldn't connect to Quisi right now. Please try again.", 'ai');
+      }
+    }
+
+    document.getElementById('popup-chat-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = document.getElementById('popup-chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      input.style.height = '38px';
+      sendUserMessage(text);
+    });
+
+    document.getElementById('popup-chat-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        document.getElementById('popup-chat-form').dispatchEvent(new Event('submit'));
+      }
+    });
+  </script>
+</body>
+</html>
